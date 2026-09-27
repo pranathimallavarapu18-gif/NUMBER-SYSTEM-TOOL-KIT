@@ -1,0 +1,3977 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number System & Math Toolkit | Base Converter, Trigonometry & Logarithms</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+/* =========================================================
+   NUMBER SYSTEM & MATH TOOLKIT - MODERN STYLESHEET
+   ========================================================= */
+
+:root {
+    /* Color Palette - Dark Theme (Default) */
+    --bg-primary: #0b0f19;
+    --bg-secondary: #111827;
+    --bg-card: rgba(22, 30, 46, 0.85);
+    --bg-card-hover: rgba(30, 41, 59, 0.95);
+    --bg-input: #0d1321;
+    --border-color: rgba(255, 255, 255, 0.08);
+    --border-color-focus: #3b82f6;
+    
+    --text-primary: #f8fafc;
+    --text-secondary: #94a3b8;
+    --text-muted: #64748b;
+    
+    --accent-blue: #3b82f6;
+    --accent-blue-hover: #2563eb;
+    --accent-cyan: #06b6d4;
+    --accent-purple: #8b5cf6;
+    --accent-emerald: #10b981;
+    --accent-amber: #f59e0b;
+    --accent-rose: #f43f5e;
+    --accent-pink: #ec4899;
+    
+    /* Base Badges Colors */
+    --base-dec-color: #3b82f6;
+    --base-bin-color: #10b981;
+    --base-oct-color: #f59e0b;
+    --base-hex-color: #8b5cf6;
+    --base-custom-color: #ec4899;
+    --base-ascii-color: #06b6d4;
+    
+    /* Shadows & Radii */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.5), 0 4px 6px -4px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.2);
+    
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+    
+    /* Transitions */
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    
+    --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, monospace;
+}
+
+[data-theme="light"] {
+    --bg-primary: #f1f5f9;
+    --bg-secondary: #ffffff;
+    --bg-card: rgba(255, 255, 255, 0.9);
+    --bg-card-hover: rgba(248, 250, 252, 1);
+    --bg-input: #f8fafc;
+    --border-color: rgba(0, 0, 0, 0.08);
+    --border-color-focus: #2563eb;
+    
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.12);
+}
+
+/* Base Reset */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    line-height: 1.5;
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+/* App Container */
+.app-container {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 290px;
+    background-color: var(--bg-secondary);
+    border-right: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+    transition: transform var(--transition-normal);
+}
+
+.sidebar-header {
+    padding: 1.25rem 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo-icon {
+    width: 44px;
+    height: 44px;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+}
+
+.logo-text h2 {
+    font-size: 1.15rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+}
+
+.badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--accent-blue);
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+}
+
+.nav-menu {
+    flex: 1;
+    padding: 1rem 0.75rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+}
+
+.nav-section-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    padding: 0.75rem 0.85rem 0.25rem 0.85rem;
+    text-transform: uppercase;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.65rem 0.95rem;
+    border: none;
+    background: transparent;
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition-fast);
+}
+
+.nav-item:hover {
+    background: var(--bg-card-hover);
+    color: var(--text-primary);
+}
+
+.nav-item.active {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.15), rgba(6, 182, 212, 0.15));
+    color: var(--accent-blue);
+    border: 1px solid rgba(59, 130, 246, 0.3);
+    box-shadow: var(--shadow-sm);
+}
+
+.nav-icon {
+    font-size: 1.1rem;
+}
+
+.sidebar-footer {
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+}
+
+.theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.65rem;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--accent-blue);
+}
+
+.theme-icon {
+    font-size: 1rem;
+}
+
+[data-theme="dark"] .light-icon { display: none; }
+[data-theme="light"] .dark-icon { display: none; }
+
+.author-tag {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+/* Main Content Layout */
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    padding: 1.5rem 2rem 3rem 2rem;
+    max-width: 1320px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.mobile-menu-btn {
+    display: none;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.5rem;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+}
+
+#tabTitle {
+    font-size: 1.65rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+}
+
+#tabSubtitle {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-top: 0.2rem;
+}
+
+/* Tabs */
+.tab-pane {
+    display: none;
+    animation: fadeIn 0.25s ease forwards;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Card Component */
+.card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.card-header {
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.card-header h2, .card-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.p-0 { padding: 0 !important; }
+.mt-3 { margin-top: 1rem !important; }
+.text-accent { color: var(--accent-cyan); font-weight: 700; }
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.25rem;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    border: none;
+    transition: all var(--transition-fast);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-blue-hover));
+    color: #ffffff;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.35);
+}
+
+.btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(59, 130, 246, 0.45);
+}
+
+.btn-outline {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.btn-outline:hover, .btn-outline.active {
+    border-color: var(--accent-blue);
+    color: var(--accent-blue);
+    background: rgba(59, 130, 246, 0.08);
+}
+
+.btn-secondary {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    color: var(--text-secondary);
+}
+
+.btn-secondary:hover {
+    color: var(--text-primary);
+    border-color: var(--border-color-focus);
+}
+
+.btn-sm {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+}
+
+.btn-block {
+    width: 100%;
+}
+
+.btn-group {
+    display: flex;
+    gap: 0.35rem;
+}
+
+/* Form Controls */
+.form-group {
+    margin-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--border-color-focus);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+}
+
+.form-control-lg {
+    font-size: 1.2rem;
+    padding: 0.9rem 1.15rem;
+}
+
+.input-with-button {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.input-unit-badge {
+    padding: 0.75rem 1rem;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--accent-cyan);
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1rem;
+}
+
+.input-hint {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+/* =========================================================
+   TAB 1: LIVE CONVERTER GRID
+   ========================================================= */
+.converter-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.25rem;
+}
+
+.input-card {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    transition: all var(--transition-fast);
+    position: relative;
+}
+
+.input-card:focus-within {
+    border-color: var(--border-color-focus);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.input-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.base-badge {
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+    letter-spacing: 0.04em;
+}
+
+.base-10 { background: rgba(59, 130, 246, 0.15); color: var(--base-dec-color); }
+.base-2 { background: rgba(16, 185, 129, 0.15); color: var(--base-bin-color); }
+.base-8 { background: rgba(245, 158, 11, 0.15); color: var(--base-oct-color); }
+.base-16 { background: rgba(139, 92, 246, 0.15); color: var(--base-hex-color); }
+.base-custom { background: rgba(236, 72, 153, 0.15); color: var(--base-custom-color); }
+.base-ascii { background: rgba(6, 182, 212, 0.15); color: var(--base-ascii-color); }
+
+.base-chars {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.copy-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    opacity: 0.7;
+    transition: opacity var(--transition-fast), transform var(--transition-fast);
+}
+
+.copy-btn:hover {
+    opacity: 1;
+    transform: scale(1.15);
+}
+
+.input-wrapper input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 1.45rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.25rem 0;
+}
+
+.input-wrapper input:focus {
+    outline: none;
+}
+
+.quick-chips {
+    display: flex;
+    gap: 0.4rem;
+    margin-top: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.chip {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-full);
+    padding: 3px 10px;
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--text-secondary);
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.chip:hover {
+    background: var(--accent-blue);
+    color: #ffffff;
+    border-color: var(--accent-blue);
+}
+
+.binary-formatted {
+    margin-top: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--accent-emerald);
+    letter-spacing: 0.1em;
+}
+
+.secondary-converters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+.custom-base-card .base-selector {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.custom-base-card select {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    font-size: 0.8rem;
+    padding: 2px 6px;
+    border-radius: var(--radius-sm);
+}
+
+/* Info highlights */
+.info-grid-card {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+}
+
+.info-stat-item {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+.stat-val {
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    color: var(--accent-cyan);
+}
+
+/* =========================================================
+   TAB 2: STEP-BY-STEP SOLVER STYLING
+   ========================================================= */
+.step-controls {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+}
+
+.step-output-container {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 1.75rem;
+}
+
+.step-header-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.step-badge-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--accent-blue);
+}
+
+.step-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    margin: 1.25rem 0;
+}
+
+.step-table th, .step-table td {
+    padding: 0.85rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.step-table th {
+    background: rgba(255, 255, 255, 0.03);
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+.step-table tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.remainder-highlight {
+    color: var(--accent-emerald);
+    font-weight: 700;
+    background: rgba(16, 185, 129, 0.1);
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+}
+
+.read-direction-box {
+    margin: 1.5rem 0;
+    padding: 1rem 1.25rem;
+    background: rgba(59, 130, 246, 0.08);
+    border-left: 4px solid var(--accent-blue);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+
+.read-direction-box p {
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-secondary);
+}
+
+.remainder-sequence {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent-emerald);
+    letter-spacing: 0.15em;
+}
+
+.final-answer-card {
+    margin-top: 1.5rem;
+    padding: 1.25rem;
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.12), rgba(6, 182, 212, 0.12));
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    border-radius: var(--radius-md);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.final-answer-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--accent-emerald);
+}
+
+.final-answer-value {
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #ffffff;
+}
+
+[data-theme="light"] .final-answer-value {
+    color: #065f46;
+}
+
+.expansion-step-item {
+    font-family: var(--font-mono);
+    padding: 0.6rem 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px dashed var(--border-color);
+}
+
+.expansion-step-item .calc-math {
+    color: var(--text-primary);
+}
+
+.expansion-step-item .calc-res {
+    color: var(--accent-cyan);
+    font-weight: 700;
+}
+
+.addition-summation-box {
+    margin-top: 1rem;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    padding: 1rem;
+    background: var(--bg-card);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+}
+
+/* =========================================================
+   TAB 3 & 4: ARITHMETIC CARDS
+   ========================================================= */
+.calculation-result-card {
+    margin-top: 1.5rem;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+}
+
+.arithmetic-step-box {
+    font-family: var(--font-mono);
+    white-space: pre-wrap;
+    line-height: 1.8;
+    background: var(--bg-secondary);
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    font-size: 0.95rem;
+}
+
+/* =========================================================
+   TAB 5: NUMBER VALIDATOR
+   ========================================================= */
+.validation-breakdown {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.25rem;
+    margin-top: 1.5rem;
+}
+
+.validator-card {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    transition: all var(--transition-normal);
+}
+
+.validator-card.valid {
+    border-color: var(--accent-emerald);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.15);
+}
+
+.validator-card.invalid {
+    border-color: var(--accent-rose);
+    box-shadow: 0 0 15px rgba(244, 63, 94, 0.15);
+}
+
+.val-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.val-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.val-badge {
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: var(--radius-full);
+}
+
+.val-badge.badge-valid {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--accent-emerald);
+}
+
+.val-badge.badge-invalid {
+    background: rgba(244, 63, 94, 0.2);
+    color: var(--accent-rose);
+}
+
+.val-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+}
+
+.val-char-stream {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+}
+
+.char-chip {
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+}
+
+.char-chip.valid-char {
+    background: rgba(16, 185, 129, 0.2);
+    color: var(--accent-emerald);
+}
+
+.char-chip.invalid-char {
+    background: rgba(244, 63, 94, 0.25);
+    color: var(--accent-rose);
+    text-decoration: underline wavy;
+}
+
+/* =========================================================
+   TAB 6: INTERACTIVE BIT BOARD
+   ========================================================= */
+.bit-board-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.bit-quick-actions {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
+.bit-grid-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+}
+
+.byte-group {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.bit-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.bit-pos {
+    font-size: 0.7rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+}
+
+.bit-btn {
+    width: 44px;
+    height: 52px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-input);
+    color: var(--text-secondary);
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-fast);
+}
+
+.bit-btn:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.bit-btn.on {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+    color: #ffffff;
+    border-color: transparent;
+    box-shadow: 0 0 12px rgba(59, 130, 246, 0.5);
+}
+
+.bit-weight {
+    font-size: 0.65rem;
+    font-family: var(--font-mono);
+    color: var(--text-muted);
+}
+
+.bit-value-summary {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+}
+
+.summary-box {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.summary-box .lbl {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.summary-box .val {
+    font-size: 1.3rem;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    color: var(--accent-emerald);
+}
+
+/* =========================================================
+   TAB 7: TRIGONOMETRY LAB
+   ========================================================= */
+.trig-layout-grid {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr;
+    gap: 1.75rem;
+}
+
+.section-subtitle {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    margin: 1.25rem 0 0.65rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.angle-slider-wrapper {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.25rem;
+}
+
+.angle-slider-wrapper label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.angle-slider-wrapper input[type="range"] {
+    width: 100%;
+    accent-color: var(--accent-blue);
+    cursor: pointer;
+}
+
+.trig-results-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+}
+
+.trig-res-card {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    transition: transform var(--transition-fast);
+}
+
+.trig-res-card:hover {
+    border-color: var(--accent-blue);
+    transform: translateY(-2px);
+}
+
+.trig-fn-name {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    font-weight: 600;
+}
+
+.trig-fn-val {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--accent-cyan);
+}
+
+.trig-fn-exact {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--accent-emerald);
+}
+
+.canvas-card {
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.canvas-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.canvas-header h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+.unit-coords-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: var(--radius-sm);
+    background: rgba(59, 130, 246, 0.15);
+    color: var(--accent-blue);
+}
+
+.canvas-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+    padding: 0.5rem;
+    width: 100%;
+}
+
+.canvas-legend {
+    display: flex;
+    gap: 0.85rem;
+    margin-top: 0.85rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.legend-item {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+}
+
+.legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.identities-card {
+    margin-top: 1.25rem;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+}
+
+.identities-card h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--accent-purple);
+}
+
+.identities-card ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.identities-card li code {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-primary);
+}
+
+/* =========================================================
+   TAB 8: LOGARITHM SUITE
+   ========================================================= */
+.log-calculator-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 1.75rem;
+}
+
+.quick-log-bases {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    flex-wrap: wrap;
+    margin: 0.5rem 0 1rem 0;
+}
+
+.log-step-result {
+    margin-top: 1.5rem;
+}
+
+.log-properties-box {
+    margin-top: 1.25rem;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.25rem;
+}
+
+.log-properties-box h4 {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--accent-emerald);
+    margin-bottom: 0.75rem;
+}
+
+.property-item {
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--border-color);
+    font-size: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+}
+
+.property-item:last-child {
+    border-bottom: none;
+}
+
+.prop-title {
+    font-weight: 700;
+    color: var(--text-secondary);
+}
+
+.property-item code {
+    font-family: var(--font-mono);
+    color: var(--accent-cyan);
+}
+
+/* =========================================================
+   TAB 9: TABLES & CHEAT SHEET
+   ========================================================= */
+.tables-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    max-height: 520px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+}
+
+.data-table th, .data-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background: var(--bg-input);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    color: var(--text-secondary);
+    font-weight: 700;
+}
+
+.data-table tr:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+/* =========================================================
+   TAB 10: PRACTICE & QUIZ
+   ========================================================= */
+.quiz-card {
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.quiz-stats {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.quiz-badge {
+    font-size: 0.85rem;
+    padding: 4px 12px;
+    border-radius: var(--radius-full);
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+}
+
+.quiz-question-box {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.question-type {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 800;
+    color: var(--accent-purple);
+}
+
+.question-text {
+    font-size: 1.4rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.quiz-options-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.quiz-option-btn {
+    padding: 1.15rem;
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    color: var(--text-primary);
+    font-family: var(--font-mono);
+    font-size: 1.15rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-align: center;
+    transition: all var(--transition-fast);
+}
+
+.quiz-option-btn:hover {
+    border-color: var(--accent-blue);
+    background: var(--bg-card-hover);
+    transform: translateY(-2px);
+}
+
+.quiz-option-btn.correct {
+    background: rgba(16, 185, 129, 0.2) !important;
+    border-color: var(--accent-emerald) !important;
+    color: var(--accent-emerald) !important;
+}
+
+.quiz-option-btn.wrong {
+    background: rgba(244, 63, 94, 0.2) !important;
+    border-color: var(--accent-rose) !important;
+    color: var(--accent-rose) !important;
+}
+
+.quiz-feedback-box {
+    margin-top: 1rem;
+    padding: 1.25rem;
+    border-radius: var(--radius-md);
+    background: var(--bg-input);
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: #10b981;
+    color: #ffffff;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-weight: 600;
+    box-shadow: var(--shadow-lg);
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 1000;
+}
+
+.toast.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* =========================================================
+   ENHANCED RESPONSIVE STYLES & TOUCH OPTIMIZATIONS
+   ========================================================= */
+
+/* Backdrop overlay for mobile drawer */
+.sidebar-backdrop {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    z-index: 998;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+}
+
+.sidebar-backdrop.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.sidebar-close-btn {
+    display: none;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: auto;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-sm);
+    line-height: 1;
+}
+
+.sidebar-close-btn:hover {
+    color: var(--text-primary);
+    background: var(--bg-card-hover);
+}
+
+/* Canvas Responsive Sizing */
+.canvas-wrapper canvas {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Responsive Table Wrapper */
+.table-responsive {
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    margin-bottom: 1rem;
+}
+
+.data-table {
+    min-width: 480px;
+}
+
+/* Prevent overflow in code/formula output */
+.arithmetic-step-box, .step-output-container, .val-char-stream, .binary-formatted {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    word-break: break-all;
+    overflow-wrap: break-word;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1200px) {
+    .tables-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 1024px) {
+    .trig-layout-grid, .log-calculator-grid {
+        grid-template-columns: 1fr;
+    }
+    .secondary-converters {
+        grid-template-columns: 1fr;
+    }
+    .info-grid-card {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .step-controls {
+        grid-template-columns: 1fr;
+    }
+    .form-row {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: min(300px, 85vw);
+        transform: translateX(-100%);
+        box-shadow: none;
+        z-index: 1000;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 12px 0 35px rgba(0, 0, 0, 0.6);
+    }
+
+    .sidebar-backdrop {
+        display: block;
+    }
+
+    .sidebar-close-btn {
+        display: inline-flex;
+    }
+
+    .mobile-menu-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .main-content {
+        padding: 1rem 1rem 2.5rem 1rem;
+        max-width: 100%;
+    }
+
+    .top-header {
+        margin-bottom: 1.25rem;
+        padding-bottom: 0.85rem;
+    }
+
+    .card-header, .card-body {
+        padding: 1.15rem;
+    }
+
+    .converter-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trig-results-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .quiz-options-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-group {
+        width: 100%;
+    }
+
+    .btn-group .btn {
+        flex: 1;
+    }
+}
+
+@media (max-width: 540px) {
+    .main-content {
+        padding: 0.85rem 0.65rem 2rem 0.65rem;
+    }
+
+    #tabTitle {
+        font-size: 1.35rem;
+    }
+
+    #tabSubtitle {
+        font-size: 0.8rem;
+    }
+
+    .card {
+        border-radius: var(--radius-md);
+        margin-bottom: 1rem;
+    }
+
+    .card-header, .card-body {
+        padding: 1rem 0.85rem;
+    }
+
+    .info-grid-card {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+    }
+
+    .info-stat-item {
+        padding: 0.75rem;
+    }
+
+    .stat-val {
+        font-size: 1rem;
+    }
+
+    .input-card {
+        padding: 1rem 0.85rem;
+    }
+
+    .input-wrapper input {
+        font-size: 1.25rem;
+    }
+
+    .btn {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+    }
+
+    .bit-btn {
+        width: 36px;
+        height: 46px;
+        font-size: 1.15rem;
+    }
+
+    .byte-group {
+        gap: 0.25rem;
+    }
+
+    .bit-value-summary {
+        grid-template-columns: 1fr 1fr;
+        gap: 0.6rem;
+    }
+
+    .summary-box {
+        padding: 0.75rem;
+    }
+
+    .summary-box .val {
+        font-size: 1.1rem;
+    }
+
+    .toast {
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        text-align: center;
+    }
+
+    .quiz-feedback-box {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+}
+
+@media (max-width: 380px) {
+    .main-content {
+        padding: 0.65rem 0.5rem 1.5rem 0.5rem;
+    }
+
+    #tabTitle {
+        font-size: 1.2rem;
+    }
+
+    .trig-results-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-grid-card {
+        grid-template-columns: 1fr;
+    }
+
+    .bit-value-summary {
+        grid-template-columns: 1fr;
+    }
+
+    .bit-btn {
+        width: 28px;
+        height: 38px;
+        font-size: 0.95rem;
+    }
+
+    .byte-group {
+        gap: 0.15rem;
+    }
+}
+
+</style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <button class="sidebar-close-btn" id="sidebarCloseBtn" aria-label="Close sidebar">&times;</button>
+                <div class="logo-icon">
+                    <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="4" y="4" width="16" height="16" rx="2" />
+                        <rect x="9" y="9" width="6" height="6" />
+                        <line x1="9" y1="1" x2="9" y2="4" />
+                        <line x1="15" y1="1" x2="15" y2="4" />
+                        <line x1="9" y1="20" x2="9" y2="23" />
+                        <line x1="15" y1="20" x2="15" y2="23" />
+                        <line x1="20" y1="9" x2="23" y2="9" />
+                        <line x1="20" y1="14" x2="23" y2="14" />
+                        <line x1="1" y1="9" x2="4" y2="9" />
+                        <line x1="1" y1="14" x2="4" y2="14" />
+                    </svg>
+                </div>
+                <div class="logo-text">
+                    <h2>NumSystem</h2>
+                    <span class="badge">Math Toolkit v3.5</span>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <div class="nav-section-label">NUMBER SYSTEMS</div>
+                <button class="nav-item active" data-tab="live-converter">
+                    <span class="nav-icon">🔄</span>
+                    <span class="nav-label">Live Multi-Converter</span>
+                </button>
+                <button class="nav-item" data-tab="step-converter">
+                    <span class="nav-icon">🪜</span>
+                    <span class="nav-label">Step-by-Step Solver</span>
+                </button>
+                <button class="nav-item" data-tab="decimal-arithmetic">
+                    <span class="nav-icon">🧮</span>
+                    <span class="nav-label">Decimal Arithmetic</span>
+                </button>
+                <button class="nav-item" data-tab="binary-arithmetic">
+                    <span class="nav-icon">⚡</span>
+                    <span class="nav-label">Binary Arithmetic</span>
+                </button>
+                <button class="nav-item" data-tab="validator">
+                    <span class="nav-icon">🔍</span>
+                    <span class="nav-label">Number Validator</span>
+                </button>
+                <button class="nav-item" data-tab="bit-board">
+                    <span class="nav-icon">🎛️</span>
+                    <span class="nav-label">Interactive Bit Board</span>
+                </button>
+
+                <div class="nav-section-label">ADVANCED MATH MODULES</div>
+                <button class="nav-item" data-tab="trigonometry">
+                    <span class="nav-icon">📐</span>
+                    <span class="nav-label">Trigonometry Lab</span>
+                </button>
+                <button class="nav-item" data-tab="logarithms">
+                    <span class="nav-icon">📉</span>
+                    <span class="nav-label">Logarithm Suite</span>
+                </button>
+
+                <div class="nav-section-label">REFERENCE & PRACTICE</div>
+                <button class="nav-item" data-tab="cheat-sheet">
+                    <span class="nav-icon">📊</span>
+                    <span class="nav-label">Cheat Sheet & Tables</span>
+                </button>
+                <button class="nav-item" data-tab="practice-quiz">
+                    <span class="nav-icon">🎯</span>
+                    <span class="nav-label">Practice & Quiz</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="theme-switch-container">
+                    <button id="themeToggleBtn" class="theme-toggle-btn" title="Toggle Light/Dark Theme">
+                        <span class="theme-icon light-icon">☀️</span>
+                        <span class="theme-icon dark-icon">🌙</span>
+                        <span class="theme-text" id="themeText">Dark Mode</span>
+                    </button>
+                </div>
+                <p class="author-tag">Interactive Math & Toolkit Web App</p>
+            </div>
+        </aside>
+        <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header Bar -->
+            <header class="top-header">
+                <div class="header-left">
+                    <button id="mobileMenuBtn" class="mobile-menu-btn" aria-label="Toggle menu">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                    <div>
+                        <h1 id="tabTitle">Live Multi-Converter</h1>
+                        <p id="tabSubtitle">Real-time simultaneous conversion across Decimal, Binary, Octal, Hexadecimal & ASCII</p>
+                    </div>
+                </div>
+                <div class="header-actions">
+                    <button class="btn btn-outline" id="quickResetBtn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+                            <path d="M3 3v5h5"/>
+                        </svg>
+                        Clear Inputs
+                    </button>
+                </div>
+            </header>
+
+            <!-- TAB 1: Live Multi-Converter -->
+            <section id="live-converter" class="tab-pane active">
+                <div class="card hero-card">
+                    <div class="card-body">
+                        <div class="converter-grid">
+                            <!-- Decimal Box -->
+                            <div class="input-card" data-base="10">
+                                <div class="input-card-header">
+                                    <span class="base-badge base-10">DECIMAL (Base 10)</span>
+                                    <span class="base-chars">Digits: 0-9</span>
+                                    <button class="copy-btn" data-target="liveDec" title="Copy value">📋</button>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="liveDec" placeholder="e.g. 255" autocomplete="off" spellcheck="false" value="255">
+                                </div>
+                                <div class="quick-chips">
+                                    <button class="chip" data-fill="0">0</button>
+                                    <button class="chip" data-fill="42">42</button>
+                                    <button class="chip" data-fill="128">128</button>
+                                    <button class="chip" data-fill="255">255</button>
+                                    <button class="chip" data-fill="1024">1024</button>
+                                </div>
+                            </div>
+
+                            <!-- Binary Box -->
+                            <div class="input-card" data-base="2">
+                                <div class="input-card-header">
+                                    <span class="base-badge base-2">BINARY (Base 2)</span>
+                                    <span class="base-chars">Digits: 0, 1</span>
+                                    <button class="copy-btn" data-target="liveBin" title="Copy value">📋</button>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="liveBin" placeholder="e.g. 11111111" autocomplete="off" spellcheck="false" value="11111111">
+                                </div>
+                                <div class="binary-formatted" id="liveBinFormatted">1111 1111</div>
+                            </div>
+
+                            <!-- Octal Box -->
+                            <div class="input-card" data-base="8">
+                                <div class="input-card-header">
+                                    <span class="base-badge base-8">OCTAL (Base 8)</span>
+                                    <span class="base-chars">Digits: 0-7</span>
+                                    <button class="copy-btn" data-target="liveOct" title="Copy value">📋</button>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="liveOct" placeholder="e.g. 377" autocomplete="off" spellcheck="false" value="377">
+                                </div>
+                            </div>
+
+                            <!-- Hexadecimal Box -->
+                            <div class="input-card" data-base="16">
+                                <div class="input-card-header">
+                                    <span class="base-badge base-16">HEXADECIMAL (Base 16)</span>
+                                    <span class="base-chars">Digits: 0-9, A-F</span>
+                                    <button class="copy-btn" data-target="liveHex" title="Copy value">📋</button>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="liveHex" placeholder="e.g. FF" autocomplete="off" spellcheck="false" value="FF">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Secondary Row: Custom Base & ASCII -->
+                        <div class="secondary-converters">
+                            <div class="input-card custom-base-card">
+                                <div class="input-card-header">
+                                    <span class="base-badge base-custom">CUSTOM RADIX</span>
+                                    <div class="base-selector">
+                                        <label for="customBaseSelect">Base:</label>
+                                        <select id="customBaseSelect">
+                                            <option value="3">Base 3 (Ternary)</option>
+                                            <option value="4">Base 4 (Quaternary)</option>
+                                            <option value="5">Base 5 (Quinary)</option>
+                                            <option value="6">Base 6 (Senary)</option>
+                                            <option value="7">Base 7 (Septenary)</option>
+                                            <option value="12">Base 12 (Duodecimal)</option>
+                                            <option value="20">Base 20 (Vigesimal)</option>
+                                            <option value="32">Base 32</option>
+                                            <option value="36" selected>Base 36 (Alphanumeric)</option>
+                                        </select>
+                                    </div>
+                                    <button class="copy-btn" data-target="liveCustom" title="Copy value">📋</button>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="liveCustom" placeholder="Value in custom base" autocomplete="off" spellcheck="false" value="73">
+                                </div>
+                            </div>
+
+                            <div class="input-card">
+                                <div class="input-card-header">
+                                    <span class="base-badge base-ascii">ASCII / TEXT</span>
+                                    <span class="base-chars">Character</span>
+                                    <button class="copy-btn" data-target="liveAscii" title="Copy value">📋</button>
+                                </div>
+                                <div class="input-wrapper">
+                                    <input type="text" id="liveAscii" placeholder="ASCII char or text" autocomplete="off" value="(Dec: 255)">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info Highlights Card -->
+                <div class="info-grid-card">
+                    <div class="info-stat-item">
+                        <span class="stat-label">Bit Length</span>
+                        <span class="stat-val" id="statBitLength">8 bits</span>
+                    </div>
+                    <div class="info-stat-item">
+                        <span class="stat-label">Byte Count</span>
+                        <span class="stat-val" id="statByteCount">1 Byte</span>
+                    </div>
+                    <div class="info-stat-item">
+                        <span class="stat-label">Parity (Count of 1s)</span>
+                        <span class="stat-val" id="statParity">8 (Even)</span>
+                    </div>
+                    <div class="info-stat-item">
+                        <span class="stat-label">Power of 2?</span>
+                        <span class="stat-val" id="statPowerOfTwo">No (256 is 2⁸)</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 2: Step-by-Step Solver -->
+            <section id="step-converter" class="tab-pane">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Step-by-Step Number System Converter</h2>
+                        <p class="text-muted">Exact breakdown of repeated division and positional expansion algorithms</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="step-controls">
+                            <div class="form-group">
+                                <label for="stepConversionType">Select Conversion Method:</label>
+                                <select id="stepConversionType" class="form-control">
+                                    <optgroup label="Decimal to Other Bases (Repeated Division Method)">
+                                        <option value="dec2bin" selected>1. Decimal to Binary (Divide by 2)</option>
+                                        <option value="dec2oct">2. Decimal to Octal (Divide by 8)</option>
+                                        <option value="dec2hex">3. Decimal to Hexadecimal (Divide by 16)</option>
+                                    </optgroup>
+                                    <optgroup label="Other Bases to Decimal (Positional Expansion Method)">
+                                        <option value="bin2dec">4. Binary to Decimal (Powers of 2)</option>
+                                        <option value="oct2dec">5. Octal to Decimal (Powers of 8)</option>
+                                        <option value="hex2dec">6. Hexadecimal to Decimal (Powers of 16)</option>
+                                    </optgroup>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="stepInputNumber">Enter Number:</label>
+                                <div class="input-with-button">
+                                    <input type="text" id="stepInputNumber" class="form-control" value="29" placeholder="Enter value">
+                                    <button id="calculateStepBtn" class="btn btn-primary">Generate Steps</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="step-output-container" id="stepOutputContainer">
+                            <!-- Populated dynamically by JS -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 3: Decimal Arithmetic -->
+            <section id="decimal-arithmetic" class="tab-pane">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Decimal Arithmetic with Detailed Steps</h2>
+                        <p class="text-muted">Perform basic arithmetic operations with clear formula breakdown</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="arithmetic-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="decNumA">First Number (A):</label>
+                                    <input type="number" id="decNumA" class="form-control" value="45">
+                                </div>
+                                <div class="form-group">
+                                    <label for="decOp">Operation:</label>
+                                    <select id="decOp" class="form-control">
+                                        <option value="add">Addition (+)</option>
+                                        <option value="sub">Subtraction (−)</option>
+                                        <option value="mul">Multiplication (×)</option>
+                                        <option value="div">Division (÷)</option>
+                                        <option value="mod">Modulus (%)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="decNumB">Second Number (B):</label>
+                                    <input type="number" id="decNumB" class="form-control" value="12">
+                                </div>
+                            </div>
+                            <button id="calcDecArithBtn" class="btn btn-primary btn-block">Calculate Decimal Result</button>
+                        </div>
+
+                        <div class="calculation-result-card" id="decArithResult">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 4: Binary Arithmetic -->
+            <section id="binary-arithmetic" class="tab-pane">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Binary Arithmetic with Carry/Borrow Tracking</h2>
+                        <p class="text-muted">Direct binary calculations with decimal verification bridge</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="arithmetic-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="binNumA">First Binary Number (A):</label>
+                                    <input type="text" id="binNumA" class="form-control" value="1101" placeholder="e.g. 1101">
+                                    <span class="input-hint" id="binHintA">Decimal: 13</span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="binOp">Operation:</label>
+                                    <select id="binOp" class="form-control">
+                                        <option value="add">Binary Addition (+)</option>
+                                        <option value="sub">Binary Subtraction (−)</option>
+                                        <option value="mul">Binary Multiplication (×)</option>
+                                        <option value="div">Binary Division (÷)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="binNumB">Second Binary Number (B):</label>
+                                    <input type="text" id="binNumB" class="form-control" value="1011" placeholder="e.g. 1011">
+                                    <span class="input-hint" id="binHintB">Decimal: 11</span>
+                                </div>
+                            </div>
+                            <button id="calcBinArithBtn" class="btn btn-primary btn-block">Calculate Binary Result</button>
+                        </div>
+
+                        <div class="calculation-result-card" id="binArithResult">
+                            <!-- Populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 5: Number Validator -->
+            <section id="validator" class="tab-pane">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Interactive Base Number Validator</h2>
+                        <p class="text-muted">Type any number to instantly validate its character legality across all standard bases</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="validateInput">Enter Number to Validate:</label>
+                            <input type="text" id="validateInput" class="form-control form-control-lg" placeholder="Type characters here..." value="1A3F">
+                        </div>
+
+                        <div class="validation-breakdown" id="validationBreakdown">
+                            <div class="validator-card" id="valCardBin">
+                                <div class="val-header">
+                                    <span class="val-title">Binary (Base 2)</span>
+                                    <span class="val-badge" id="valBadgeBin">Checking...</span>
+                                </div>
+                                <p class="val-desc">Allowed characters: <code>0, 1</code></p>
+                                <div class="val-char-stream" id="valStreamBin"></div>
+                            </div>
+
+                            <div class="validator-card" id="valCardOct">
+                                <div class="val-header">
+                                    <span class="val-title">Octal (Base 8)</span>
+                                    <span class="val-badge" id="valBadgeOct">Checking...</span>
+                                </div>
+                                <p class="val-desc">Allowed characters: <code>0-7</code></p>
+                                <div class="val-char-stream" id="valStreamOct"></div>
+                            </div>
+
+                            <div class="validator-card" id="valCardDec">
+                                <div class="val-header">
+                                    <span class="val-title">Decimal (Base 10)</span>
+                                    <span class="val-badge" id="valBadgeDec">Checking...</span>
+                                </div>
+                                <p class="val-desc">Allowed characters: <code>0-9</code></p>
+                                <div class="val-char-stream" id="valStreamDec"></div>
+                            </div>
+
+                            <div class="validator-card" id="valCardHex">
+                                <div class="val-header">
+                                    <span class="val-title">Hexadecimal (Base 16)</span>
+                                    <span class="val-badge" id="valBadgeHex">Checking...</span>
+                                </div>
+                                <p class="val-desc">Allowed characters: <code>0-9, A-F, a-f</code></p>
+                                <div class="val-char-stream" id="valStreamHex"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 6: Interactive Bit Board -->
+            <section id="bit-board" class="tab-pane">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Interactive Bit Board (8 / 16 / 32 Bits)</h2>
+                        <p class="text-muted">Click any individual bit to toggle it (0/1) and inspect values live</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="bit-board-controls">
+                            <div class="btn-group" id="bitSizeGroup">
+                                <button class="btn btn-sm btn-outline active" data-bits="8">8-Bit (Byte)</button>
+                                <button class="btn btn-sm btn-outline" data-bits="16">16-Bit (Word)</button>
+                                <button class="btn btn-sm btn-outline" data-bits="32">32-Bit (DWord)</button>
+                            </div>
+                            <div class="bit-quick-actions">
+                                <button class="btn btn-sm btn-secondary" id="bitClearBtn">All 0s</button>
+                                <button class="btn btn-sm btn-secondary" id="bitSetAllBtn">All 1s</button>
+                                <button class="btn btn-sm btn-secondary" id="bitInvertBtn">Invert (NOT)</button>
+                                <button class="btn btn-sm btn-secondary" id="bitShiftLeftBtn">&lt;&lt; Shift Left</button>
+                                <button class="btn btn-sm btn-secondary" id="bitShiftRightBtn">&gt;&gt; Shift Right</button>
+                            </div>
+                        </div>
+
+                        <div class="bit-grid-container" id="bitGridContainer">
+                            <!-- Populated dynamically -->
+                        </div>
+
+                        <div class="bit-value-summary">
+                            <div class="summary-box">
+                                <span class="lbl">Unsigned Decimal</span>
+                                <span class="val" id="bitValUnsigned">0</span>
+                            </div>
+                            <div class="summary-box">
+                                <span class="lbl">Signed Decimal (2's Comp)</span>
+                                <span class="val" id="bitValSigned">0</span>
+                            </div>
+                            <div class="summary-box">
+                                <span class="lbl">Hexadecimal</span>
+                                <span class="val" id="bitValHex">0x00</span>
+                            </div>
+                            <div class="summary-box">
+                                <span class="lbl">Octal</span>
+                                <span class="val" id="bitValOct">0o0</span>
+                            </div>
+                            <div class="summary-box">
+                                <span class="lbl">ASCII Char</span>
+                                <span class="val" id="bitValAscii">NUL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 7: TRIGONOMETRY LAB -->
+            <section id="trigonometry" class="tab-pane">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📐 Interactive Trigonometry Lab & Unit Circle</h2>
+                        <div class="angle-mode-selector">
+                            <span class="text-muted" style="font-size: 0.85rem; font-weight:600;">Angle Mode:</span>
+                            <div class="btn-group" id="trigAngleModeGroup">
+                                <button class="btn btn-sm btn-outline active" data-mode="deg">DEG (°)</button>
+                                <button class="btn btn-sm btn-outline" data-mode="rad">RAD (rad)</button>
+                                <button class="btn btn-sm btn-outline" data-mode="grad">GRAD (gon)</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="trig-layout-grid">
+                            <!-- Left: Angle Input and Functions Grid -->
+                            <div class="trig-left-col">
+                                <div class="form-group">
+                                    <label for="trigAngleInput">Enter Angle (θ):</label>
+                                    <div class="input-with-button">
+                                        <input type="text" id="trigAngleInput" class="form-control" value="45">
+                                        <span class="input-unit-badge" id="trigUnitBadge">deg (°)</span>
+                                    </div>
+                                </div>
+
+                                <div class="angle-slider-wrapper">
+                                    <label for="trigAngleSlider">Angle Slider (0° - 360°):</label>
+                                    <input type="range" id="trigAngleSlider" min="0" max="360" value="45" step="1">
+                                    <div class="quick-chips trig-quick-angles">
+                                        <button class="chip" data-trig-angle="0">0°</button>
+                                        <button class="chip" data-trig-angle="30">30° (π/6)</button>
+                                        <button class="chip" data-trig-angle="45">45° (π/4)</button>
+                                        <button class="chip" data-trig-angle="60">60° (π/3)</button>
+                                        <button class="chip" data-trig-angle="90">90° (π/2)</button>
+                                        <button class="chip" data-trig-angle="180">180° (π)</button>
+                                        <button class="chip" data-trig-angle="270">270° (3π/2)</button>
+                                        <button class="chip" data-trig-angle="360">360° (2π)</button>
+                                    </div>
+                                </div>
+
+                                <!-- Primary Trig Functions -->
+                                <h3 class="section-subtitle">Primary Trigonometric Functions</h3>
+                                <div class="trig-results-grid">
+                                    <div class="trig-res-card">
+                                        <span class="trig-fn-name">sin(θ)</span>
+                                        <span class="trig-fn-val" id="resSin">0.7071</span>
+                                        <span class="trig-fn-exact" id="exactSin">√2 / 2</span>
+                                    </div>
+                                    <div class="trig-res-card">
+                                        <span class="trig-fn-name">cos(θ)</span>
+                                        <span class="trig-fn-val" id="resCos">0.7071</span>
+                                        <span class="trig-fn-exact" id="exactCos">√2 / 2</span>
+                                    </div>
+                                    <div class="trig-res-card">
+                                        <span class="trig-fn-name">tan(θ)</span>
+                                        <span class="trig-fn-val" id="resTan">1.0000</span>
+                                        <span class="trig-fn-exact" id="exactTan">1</span>
+                                    </div>
+                                </div>
+
+                                <!-- Reciprocal Functions -->
+                                <h3 class="section-subtitle">Reciprocal Functions</h3>
+                                <div class="trig-results-grid">
+                                    <div class="trig-res-card">
+                                        <span class="trig-fn-name">csc(θ) = 1/sin</span>
+                                        <span class="trig-fn-val" id="resCsc">1.4142</span>
+                                        <span class="trig-fn-exact" id="exactCsc">√2</span>
+                                    </div>
+                                    <div class="trig-res-card">
+                                        <span class="trig-fn-name">sec(θ) = 1/cos</span>
+                                        <span class="trig-fn-val" id="resSec">1.4142</span>
+                                        <span class="trig-fn-exact" id="exactSec">√2</span>
+                                    </div>
+                                    <div class="trig-res-card">
+                                        <span class="trig-fn-name">cot(θ) = 1/tan</span>
+                                        <span class="trig-fn-val" id="resCot">1.0000</span>
+                                        <span class="trig-fn-exact" id="exactCot">1</span>
+                                    </div>
+                                </div>
+
+                                <!-- Hyperbolic Functions -->
+                                <h3 class="section-subtitle">Hyperbolic Functions (Real Domain)</h3>
+                                <div class="trig-results-grid">
+                                    <div class="trig-res-card">
+                                        <span class="trig-fn-name">sinh(x)</span>
+                                        <span class="trig-fn-val" id="resSinh">0.8687</span>
+                                    </div>
+                                    <div class="trig-res-card">
+                                        <span class="trig-fn-name">cosh(x)</span>
+                                        <span class="trig-fn-val" id="resCosh">1.3246</span>
+                                    </div>
+                                    <div class="trig-res-card">
+                                        <span class="trig-fn-name">tanh(x)</span>
+                                        <span class="trig-fn-val" id="resTanh">0.6558</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Live Visual Unit Circle Canvas -->
+                            <div class="trig-right-col">
+                                <div class="canvas-card">
+                                    <div class="canvas-header">
+                                        <h4>Interactive Unit Circle (r = 1)</h4>
+                                        <span class="unit-coords-badge" id="unitCoordsBadge">(x: 0.707, y: 0.707)</span>
+                                    </div>
+                                    <div class="canvas-wrapper">
+                                        <canvas id="unitCircleCanvas" width="340" height="340"></canvas>
+                                    </div>
+                                    <div class="canvas-legend">
+                                        <span class="legend-item"><span class="legend-dot" style="background:#10b981;"></span> Sine (y)</span>
+                                        <span class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span> Cosine (x)</span>
+                                        <span class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span> Angle (θ)</span>
+                                        <span class="legend-item"><span class="legend-dot" style="background:#ec4899;"></span> Radius (r=1)</span>
+                                    </div>
+                                </div>
+
+                                <div class="identities-card">
+                                    <h4>Fundamental Identities</h4>
+                                    <ul>
+                                        <li><code>sin²(θ) + cos²(θ) = 1</code></li>
+                                        <li><code>1 + tan²(θ) = sec²(θ)</code></li>
+                                        <li><code>sin(2θ) = 2 sin(θ) cos(θ)</code></li>
+                                        <li><code>cos(2θ) = cos²(θ) - sin²(θ)</code></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 8: LOGARITHM SUITE -->
+            <section id="logarithms" class="tab-pane">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>📉 Logarithm Suite & Step-by-Step Solver</h2>
+                        <p class="text-muted">Calculate logarithms of any base, inspect change-of-base steps, and visualize curves</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="log-calculator-grid">
+                            <div class="log-input-panel">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="logArgInput">Argument (x) [x &gt; 0]:</label>
+                                        <input type="text" id="logArgInput" class="form-control form-control-lg" value="100" placeholder="e.g. 100, 64, e">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="logBaseInput">Base (b) [b &gt; 0, b ≠ 1]:</label>
+                                        <input type="text" id="logBaseInput" class="form-control form-control-lg" value="10" placeholder="e.g. 10, e, 2, 16">
+                                    </div>
+                                </div>
+
+                                <div class="quick-log-bases">
+                                    <span class="text-muted" style="font-size:0.8rem; font-weight:600;">Presets:</span>
+                                    <button class="chip" data-log-base="10">Base 10 (log₁₀)</button>
+                                    <button class="chip" data-log-base="e">Base e (ln)</button>
+                                    <button class="chip" data-log-base="2">Base 2 (log₂ - CS)</button>
+                                    <button class="chip" data-log-base="16">Base 16 (log₁₆)</button>
+                                    <button class="chip" data-log-base="8">Base 8 (log₈)</button>
+                                </div>
+
+                                <button id="calcLogBtn" class="btn btn-primary btn-block mt-3">Calculate Logarithm &amp; Generate Steps</button>
+
+                                <div class="log-step-result" id="logStepResult">
+                                    <!-- Populated dynamically -->
+                                </div>
+                            </div>
+
+                            <div class="log-graph-panel">
+                                <div class="canvas-card">
+                                    <div class="canvas-header">
+                                        <h4>Logarithmic Curve: y = log<sub>b</sub>(x)</h4>
+                                        <span class="unit-coords-badge" id="logCoordBadge">Point: (100, 2)</span>
+                                    </div>
+                                    <div class="canvas-wrapper">
+                                        <canvas id="logGraphCanvas" width="340" height="260"></canvas>
+                                    </div>
+                                    <p class="text-muted" style="font-size:0.75rem; text-align:center; margin-top:6px;">
+                                        Vertical Asymptote at x = 0 &bull; Passes through (1, 0)
+                                    </p>
+                                </div>
+
+                                <div class="log-properties-box">
+                                    <h4>Interactive Logarithm Laws</h4>
+                                    <div class="property-item">
+                                        <span class="prop-title">1. Product Rule:</span>
+                                        <code>log<sub>b</sub>(M × N) = log<sub>b</sub>(M) + log<sub>b</sub>(N)</code>
+                                    </div>
+                                    <div class="property-item">
+                                        <span class="prop-title">2. Quotient Rule:</span>
+                                        <code>log<sub>b</sub>(M / N) = log<sub>b</sub>(M) - log<sub>b</sub>(N)</code>
+                                    </div>
+                                    <div class="property-item">
+                                        <span class="prop-title">3. Power Rule:</span>
+                                        <code>log<sub>b</sub>(M<sup>k</sup>) = k × log<sub>b</sub>(M)</code>
+                                    </div>
+                                    <div class="property-item">
+                                        <span class="prop-title">4. Change of Base:</span>
+                                        <code>log<sub>b</sub>(x) = ln(x) / ln(b) = log₁₀(x) / log₁₀(b)</code>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 9: Cheat Sheet & Conversion Tables -->
+            <section id="cheat-sheet" class="tab-pane">
+                <div class="tables-grid">
+                    <!-- 4-Bit Hex to Binary Table -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Hexadecimal Nibble Table (4-bit)</h3>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Decimal</th>
+                                            <th>Hex</th>
+                                            <th>Binary</th>
+                                            <th>Octal</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="hexTableBody">
+                                        <tr><td><strong>0</strong></td><td><span class="badge base-16">0</span></td><td><code>0000</code></td><td><span class="badge base-8">0</span></td></tr>
+                                        <tr><td><strong>1</strong></td><td><span class="badge base-16">1</span></td><td><code>0001</code></td><td><span class="badge base-8">1</span></td></tr>
+                                        <tr><td><strong>2</strong></td><td><span class="badge base-16">2</span></td><td><code>0010</code></td><td><span class="badge base-8">2</span></td></tr>
+                                        <tr><td><strong>3</strong></td><td><span class="badge base-16">3</span></td><td><code>0011</code></td><td><span class="badge base-8">3</span></td></tr>
+                                        <tr><td><strong>4</strong></td><td><span class="badge base-16">4</span></td><td><code>0100</code></td><td><span class="badge base-8">4</span></td></tr>
+                                        <tr><td><strong>5</strong></td><td><span class="badge base-16">5</span></td><td><code>0101</code></td><td><span class="badge base-8">5</span></td></tr>
+                                        <tr><td><strong>6</strong></td><td><span class="badge base-16">6</span></td><td><code>0110</code></td><td><span class="badge base-8">6</span></td></tr>
+                                        <tr><td><strong>7</strong></td><td><span class="badge base-16">7</span></td><td><code>0111</code></td><td><span class="badge base-8">7</span></td></tr>
+                                        <tr><td><strong>8</strong></td><td><span class="badge base-16">8</span></td><td><code>1000</code></td><td><span class="badge base-8">10</span></td></tr>
+                                        <tr><td><strong>9</strong></td><td><span class="badge base-16">9</span></td><td><code>1001</code></td><td><span class="badge base-8">11</span></td></tr>
+                                        <tr><td><strong>10</strong></td><td><span class="badge base-16">A</span></td><td><code>1010</code></td><td><span class="badge base-8">12</span></td></tr>
+                                        <tr><td><strong>11</strong></td><td><span class="badge base-16">B</span></td><td><code>1011</code></td><td><span class="badge base-8">13</span></td></tr>
+                                        <tr><td><strong>12</strong></td><td><span class="badge base-16">C</span></td><td><code>1100</code></td><td><span class="badge base-8">14</span></td></tr>
+                                        <tr><td><strong>13</strong></td><td><span class="badge base-16">D</span></td><td><code>1101</code></td><td><span class="badge base-8">15</span></td></tr>
+                                        <tr><td><strong>14</strong></td><td><span class="badge base-16">E</span></td><td><code>1110</code></td><td><span class="badge base-8">16</span></td></tr>
+                                        <tr><td><strong>15</strong></td><td><span class="badge base-16">F</span></td><td><code>1111</code></td><td><span class="badge base-8">17</span></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Powers of 2 Table -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Powers of 2 Reference Table</h3>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="data-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Power (2<sup>n</sup>)</th>
+                                            <th>Value</th>
+                                            <th>Storage Size</th>
+                                            <th>Hex Equivalent</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="powersTableBody">
+                                        <tr><td><strong>2<sup>0</sup></strong></td><td><code>1</code></td><td><span class="text-muted">1 bit</span></td><td><code>0x1</code></td></tr>
+                                        <tr><td><strong>2<sup>1</sup></strong></td><td><code>2</code></td><td><span class="text-muted">2 bits</span></td><td><code>0x2</code></td></tr>
+                                        <tr><td><strong>2<sup>2</sup></strong></td><td><code>4</code></td><td><span class="text-muted">4 bits (Nibble)</span></td><td><code>0x4</code></td></tr>
+                                        <tr><td><strong>2<sup>3</sup></strong></td><td><code>8</code></td><td><span class="text-muted">1 Byte (8 bits)</span></td><td><code>0x8</code></td></tr>
+                                        <tr><td><strong>2<sup>4</sup></strong></td><td><code>16</code></td><td><span class="text-muted">16 bits</span></td><td><code>0x10</code></td></tr>
+                                        <tr><td><strong>2<sup>5</sup></strong></td><td><code>32</code></td><td><span class="text-muted">32 bits</span></td><td><code>0x20</code></td></tr>
+                                        <tr><td><strong>2<sup>6</sup></strong></td><td><code>64</code></td><td><span class="text-muted">64 bits</span></td><td><code>0x40</code></td></tr>
+                                        <tr><td><strong>2<sup>7</sup></strong></td><td><code>128</code></td><td><span class="text-muted">128 bits</span></td><td><code>0x80</code></td></tr>
+                                        <tr><td><strong>2<sup>8</sup></strong></td><td><code>256</code></td><td><span class="text-muted">256 states (1 Byte max)</span></td><td><code>0x100</code></td></tr>
+                                        <tr><td><strong>2<sup>9</sup></strong></td><td><code>512</code></td><td><span class="text-muted">512 states</span></td><td><code>0x200</code></td></tr>
+                                        <tr><td><strong>2<sup>10</sup></strong></td><td><code>1,024</code></td><td><span class="text-muted">1 Kilobyte (1 KB)</span></td><td><code>0x400</code></td></tr>
+                                        <tr><td><strong>2<sup>11</sup></strong></td><td><code>2,048</code></td><td><span class="text-muted">2 KB</span></td><td><code>0x800</code></td></tr>
+                                        <tr><td><strong>2<sup>12</sup></strong></td><td><code>4,096</code></td><td><span class="text-muted">4 KB</span></td><td><code>0x1000</code></td></tr>
+                                        <tr><td><strong>2<sup>13</sup></strong></td><td><code>8,192</code></td><td><span class="text-muted">8 KB</span></td><td><code>0x2000</code></td></tr>
+                                        <tr><td><strong>2<sup>14</sup></strong></td><td><code>16,384</code></td><td><span class="text-muted">16 KB</span></td><td><code>0x4000</code></td></tr>
+                                        <tr><td><strong>2<sup>15</sup></strong></td><td><code>32,768</code></td><td><span class="text-muted">32 KB</span></td><td><code>0x8000</code></td></tr>
+                                        <tr><td><strong>2<sup>16</sup></strong></td><td><code>65,536</code></td><td><span class="text-muted">64 KB (16-bit max)</span></td><td><code>0x10000</code></td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- TAB 10: Practice & Quiz -->
+            <section id="practice-quiz" class="tab-pane">
+                <div class="card quiz-card">
+                    <div class="card-header">
+                        <h2>Number System & Math Practice Quiz</h2>
+                        <div class="quiz-stats">
+                            <span class="quiz-badge score-badge">Score: <strong id="quizScore">0</strong></span>
+                            <span class="quiz-badge streak-badge">Streak: <strong id="quizStreak">0 🔥</strong></span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="quiz-question-box">
+                            <span class="question-type" id="quizType">Conversion Challenge</span>
+                            <h3 class="question-text" id="quizPrompt">Convert Decimal <span class="text-accent">25</span> to Binary:</h3>
+                            
+                            <div class="quiz-options-grid" id="quizOptions">
+                                <button class="quiz-option-btn">11001</button>
+                                <button class="quiz-option-btn">11010</button>
+                                <button class="quiz-option-btn">10111</button>
+                                <button class="quiz-option-btn">10011</button>
+                            </div>
+
+                            <div class="quiz-feedback-box" id="quizFeedback" style="display: none;">
+                                <div id="feedbackText"></div>
+                                <button id="quizNextBtn" class="btn btn-primary">Next Challenge →</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Toast Notification for Copies -->
+    <div id="toast" class="toast">Copied to clipboard!</div>
+
+    <script>
+/**
+ * NUMBER SYSTEM & ADVANCED MATH TOOLKIT - SCRIPT ENGINE
+ * Production-ready, fully interactive implementation.
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // =========================================================
+    // 1. STATE & THEME INITIALIZATION
+    // =========================================================
+    const state = {
+        theme: localStorage.getItem('nst_theme') || 'dark',
+        activeTab: 'live-converter',
+        bitBoardSize: 8,
+        bitBoardState: new Array(32).fill(0),
+        trigAngleMode: 'deg', // 'deg', 'rad', 'grad'
+        currentTrigAngleDeg: 45,
+        quiz: {
+            score: 0,
+            streak: 0,
+            currentQuestion: null
+        }
+    };
+
+    document.documentElement.setAttribute('data-theme', state.theme);
+    updateThemeButtonUI();
+
+    // Initialize all components
+    initTabNavigation();
+    initThemeToggle();
+    initQuickActions();
+    initLiveConverter();
+    initStepConverter();
+    initDecimalArithmetic();
+    initBinaryArithmetic();
+    initValidator();
+    initBitBoard();
+    initTrigonometry();
+    initLogarithms();
+    initQuiz();
+
+    // =========================================================
+    // 2. THEME & NAVIGATION
+    // =========================================================
+    function initThemeToggle() {
+        const themeBtn = document.getElementById('themeToggleBtn');
+        if (!themeBtn) return;
+        themeBtn.addEventListener('click', () => {
+            state.theme = state.theme === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', state.theme);
+            localStorage.setItem('nst_theme', state.theme);
+            updateThemeButtonUI();
+            drawUnitCircle();
+            drawLogGraph();
+        });
+    }
+
+    function updateThemeButtonUI() {
+        const themeText = document.getElementById('themeText');
+        if (themeText) {
+            themeText.textContent = state.theme === 'dark' ? 'Dark Mode' : 'Light Mode';
+        }
+    }
+
+    function initTabNavigation() {
+        const navItems = document.querySelectorAll('.nav-item');
+        const tabPanes = document.querySelectorAll('.tab-pane');
+        const tabTitle = document.getElementById('tabTitle');
+        const tabSubtitle = document.getElementById('tabSubtitle');
+        const sidebar = document.getElementById('sidebar');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+
+        const tabMetadata = {
+            'live-converter': {
+                title: 'Live Multi-Converter',
+                subtitle: 'Real-time simultaneous conversion across Decimal, Binary, Octal, Hexadecimal & ASCII'
+            },
+            'step-converter': {
+                title: 'Step-by-Step Solver',
+                subtitle: 'Detailed mathematical breakdown of division & positional expansion algorithms'
+            },
+            'decimal-arithmetic': {
+                title: 'Decimal Arithmetic',
+                subtitle: 'Perform arithmetic operations with step-by-step formula breakdown'
+            },
+            'binary-arithmetic': {
+                title: 'Binary Arithmetic',
+                subtitle: 'Direct binary calculations with carry tracking and decimal verification'
+            },
+            'validator': {
+                title: 'Number Validator',
+                subtitle: 'Real-time base syntax checker with per-character analysis'
+            },
+            'bit-board': {
+                title: 'Interactive Bit Board',
+                subtitle: 'Clickable 8/16/32-bit registers with live signed/unsigned interpretations'
+            },
+            'trigonometry': {
+                title: 'Trigonometry Lab & Unit Circle',
+                subtitle: 'Interactive unit circle, exact standard angles, reciprocals & hyperbolics'
+            },
+            'logarithms': {
+                title: 'Logarithm Suite & Step Solver',
+                subtitle: 'Multi-base logarithms (Base 10, e, 2, custom), change of base steps & curve plotter'
+            },
+            'cheat-sheet': {
+                title: 'Cheat Sheet & Tables',
+                subtitle: 'Reference tables for 4-bit nibbles, powers of 2, and data sizes'
+            },
+            'practice-quiz': {
+                title: 'Practice & Quiz Mode',
+                subtitle: 'Test your understanding of number systems, trigonometry, and logarithms'
+            }
+        };
+
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                const targetTab = item.dataset.tab;
+                if (!targetTab) return;
+
+                navItems.forEach(n => n.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+
+                item.classList.add('active');
+                const targetPane = document.getElementById(targetTab);
+                if (targetPane) targetPane.classList.add('active');
+
+                if (tabMetadata[targetTab]) {
+                    if (tabTitle) tabTitle.textContent = tabMetadata[targetTab].title;
+                    if (tabSubtitle) tabSubtitle.textContent = tabMetadata[targetTab].subtitle;
+                }
+
+                state.activeTab = targetTab;
+
+                if (targetTab === 'trigonometry') setTimeout(drawUnitCircle, 50);
+                if (targetTab === 'logarithms') setTimeout(drawLogGraph, 50);
+
+                if (window.innerWidth <= 768 && sidebar) {
+                    sidebar.classList.remove('open');
+                }
+            });
+        });
+
+        const sidebarBackdrop = document.getElementById('sidebarBackdrop');
+        const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+
+        function openSidebar() {
+            if (sidebar) sidebar.classList.add('open');
+            if (sidebarBackdrop) sidebarBackdrop.classList.add('show');
+            document.body.classList.add('sidebar-open');
+        }
+
+        function closeSidebar() {
+            if (sidebar) sidebar.classList.remove('open');
+            if (sidebarBackdrop) sidebarBackdrop.classList.remove('show');
+            document.body.classList.remove('sidebar-open');
+        }
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (sidebar && sidebar.classList.contains('open')) {
+                    closeSidebar();
+                } else {
+                    openSidebar();
+                }
+            });
+        }
+
+        if (sidebarBackdrop) {
+            sidebarBackdrop.addEventListener('click', closeSidebar);
+        }
+
+        if (sidebarCloseBtn) {
+            sidebarCloseBtn.addEventListener('click', closeSidebar);
+        }
+
+        // Close sidebar when clicking any nav-item on mobile
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                if (window.innerWidth <= 768) {
+                    closeSidebar();
+                }
+            });
+        });
+
+        // Window resize handler for canvas & sidebar
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                closeSidebar();
+            }
+            if (state.activeTab === 'trigonometry') {
+                drawUnitCircle();
+            }
+            if (state.activeTab === 'logarithms') {
+                drawLogGraph();
+            }
+        });
+    }
+
+    // =========================================================
+    // 3. TOAST & QUICK ACTIONS
+    // =========================================================
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        if (!toast) return;
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2200);
+    }
+
+    function initQuickActions() {
+        document.querySelectorAll('.copy-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.dataset.target;
+                const input = document.getElementById(targetId);
+                if (input && input.value) {
+                    navigator.clipboard.writeText(input.value).then(() => {
+                        showToast(`Copied "${input.value}" to clipboard!`);
+                    }).catch(() => {
+                        input.select();
+                        document.execCommand('copy');
+                        showToast(`Copied to clipboard!`);
+                    });
+                }
+            });
+        });
+
+        const quickResetBtn = document.getElementById('quickResetBtn');
+        if (quickResetBtn) {
+            quickResetBtn.addEventListener('click', () => {
+                const ids = ['liveDec', 'liveBin', 'liveOct', 'liveHex', 'liveCustom', 'liveAscii'];
+                ids.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) el.value = '';
+                });
+                const binFormatted = document.getElementById('liveBinFormatted');
+                if (binFormatted) binFormatted.textContent = '0000 0000';
+                updateInfoStats(0);
+                showToast('Cleared all inputs');
+            });
+        }
+    }
+
+    // =========================================================
+    // 4. LIVE MULTI-CONVERTER
+    // =========================================================
+    function initLiveConverter() {
+        const decInput = document.getElementById('liveDec');
+        const binInput = document.getElementById('liveBin');
+        const octInput = document.getElementById('liveOct');
+        const hexInput = document.getElementById('liveHex');
+        const customInput = document.getElementById('liveCustom');
+        const customSelect = document.getElementById('customBaseSelect');
+        const asciiInput = document.getElementById('liveAscii');
+        const binFormatted = document.getElementById('liveBinFormatted');
+
+        if (!decInput) return;
+
+        function formatBinaryWithSpaces(binStr) {
+            if (!binStr) return '0000 0000';
+            const padLen = (4 - (binStr.length % 4)) % 4;
+            const padded = '0'.repeat(padLen) + binStr;
+            return padded.match(/.{1,4}/g)?.join(' ') || binStr;
+        }
+
+        function updateAllFromDecimal(decVal, source = 'dec') {
+            if (isNaN(decVal) || decVal === null || decVal === '') {
+                if (source !== 'dec' && decInput) decInput.value = '';
+                if (source !== 'bin' && binInput) binInput.value = '';
+                if (source !== 'oct' && octInput) octInput.value = '';
+                if (source !== 'hex' && hexInput) hexInput.value = '';
+                if (source !== 'custom' && customInput) customInput.value = '';
+                if (source !== 'ascii' && asciiInput) asciiInput.value = '';
+                if (binFormatted) binFormatted.textContent = '0000 0000';
+                updateInfoStats(0);
+                return;
+            }
+
+            const num = BigInt(Math.floor(Number(decVal)));
+            const customBase = customSelect ? parseInt(customSelect.value, 10) : 36;
+
+            if (source !== 'dec' && decInput) decInput.value = num.toString(10);
+            if (source !== 'bin' && binInput) binInput.value = num.toString(2);
+            if (source !== 'oct' && octInput) octInput.value = num.toString(8);
+            if (source !== 'hex' && hexInput) hexInput.value = num.toString(16).toUpperCase();
+            if (source !== 'custom' && customInput) customInput.value = num.toString(customBase).toUpperCase();
+
+            if (source !== 'ascii' && asciiInput) {
+                if (num >= 32n && num <= 126n) {
+                    asciiInput.value = String.fromCharCode(Number(num));
+                } else if (num >= 0n && num < 32n) {
+                    const controlCodes = ["NUL","SOH","STX","ETX","EOT","ENQ","ACK","BEL","BS","HT","LF","VT","FF","CR","SO","SI","DLE","DC1","DC2","DC3","DC4","NAK","SYN","ETB","CAN","EM","SUB","ESC","FS","GS","RS","US"];
+                    asciiInput.value = `[${controlCodes[Number(num)]}]`;
+                } else {
+                    asciiInput.value = `(Dec: ${num})`;
+                }
+            }
+
+            if (binFormatted) binFormatted.textContent = formatBinaryWithSpaces(num.toString(2));
+            updateInfoStats(Number(num));
+        }
+
+        function updateInfoStats(num) {
+            const bitLenElem = document.getElementById('statBitLength');
+            const byteCountElem = document.getElementById('statByteCount');
+            const parityElem = document.getElementById('statParity');
+            const powerOfTwoElem = document.getElementById('statPowerOfTwo');
+
+            if (!num || num < 0) {
+                if (bitLenElem) bitLenElem.textContent = '0 bits';
+                if (byteCountElem) byteCountElem.textContent = '0 Bytes';
+                if (parityElem) parityElem.textContent = '0 (Even)';
+                if (powerOfTwoElem) powerOfTwoElem.textContent = 'No';
+                return;
+            }
+
+            const bin = num.toString(2);
+            const bitLength = bin.length;
+            const byteCount = Math.ceil(bitLength / 8);
+            const onesCount = (bin.match(/1/g) || []).length;
+            const isEvenParity = onesCount % 2 === 0;
+            const isPowerOfTwo = (num > 0) && ((num & (num - 1)) === 0);
+
+            if (bitLenElem) bitLenElem.textContent = `${bitLength} bits`;
+            if (byteCountElem) byteCountElem.textContent = `${byteCount} Byte${byteCount > 1 ? 's' : ''}`;
+            if (parityElem) parityElem.textContent = `${onesCount} (${isEvenParity ? 'Even' : 'Odd'})`;
+            if (powerOfTwoElem) {
+                if (isPowerOfTwo) {
+                    const power = Math.log2(num);
+                    powerOfTwoElem.textContent = `Yes (2^${power})`;
+                } else {
+                    powerOfTwoElem.textContent = 'No';
+                }
+            }
+        }
+
+        decInput.addEventListener('input', (e) => {
+            const clean = e.target.value.replace(/[^0-9]/g, '');
+            if (e.target.value !== clean) e.target.value = clean;
+            if (clean === '') { updateAllFromDecimal('', 'dec'); return; }
+            updateAllFromDecimal(parseInt(clean, 10), 'dec');
+        });
+
+        if (binInput) {
+            binInput.addEventListener('input', (e) => {
+                const clean = e.target.value.replace(/[^01]/g, '');
+                if (e.target.value !== clean) e.target.value = clean;
+                if (clean === '') { updateAllFromDecimal('', 'bin'); return; }
+                const dec = parseInt(clean, 2);
+                updateAllFromDecimal(dec, 'bin');
+            });
+        }
+
+        if (octInput) {
+            octInput.addEventListener('input', (e) => {
+                const clean = e.target.value.replace(/[^0-7]/g, '');
+                if (e.target.value !== clean) e.target.value = clean;
+                if (clean === '') { updateAllFromDecimal('', 'oct'); return; }
+                const dec = parseInt(clean, 8);
+                updateAllFromDecimal(dec, 'oct');
+            });
+        }
+
+        if (hexInput) {
+            hexInput.addEventListener('input', (e) => {
+                const clean = e.target.value.replace(/[^0-9a-fA-F]/g, '').toUpperCase();
+                if (e.target.value !== clean) e.target.value = clean;
+                if (clean === '') { updateAllFromDecimal('', 'hex'); return; }
+                const dec = parseInt(clean, 16);
+                updateAllFromDecimal(dec, 'hex');
+            });
+        }
+
+        if (customInput) {
+            customInput.addEventListener('input', (e) => {
+                const base = customSelect ? parseInt(customSelect.value, 10) : 36;
+                const val = e.target.value.trim();
+                if (val === '') { updateAllFromDecimal('', 'custom'); return; }
+                try {
+                    const dec = parseInt(val, base);
+                    if (!isNaN(dec)) updateAllFromDecimal(dec, 'custom');
+                } catch {}
+            });
+        }
+
+        if (customSelect) {
+            customSelect.addEventListener('change', () => {
+                const decVal = parseInt(decInput.value, 10);
+                if (!isNaN(decVal)) updateAllFromDecimal(decVal, 'dec');
+            });
+        }
+
+        if (asciiInput) {
+            asciiInput.addEventListener('input', (e) => {
+                const text = e.target.value;
+                if (!text) { updateAllFromDecimal('', 'ascii'); return; }
+                const charCode = text.charCodeAt(0);
+                updateAllFromDecimal(charCode, 'ascii');
+            });
+        }
+
+        document.querySelectorAll('.chip[data-fill]').forEach(chip => {
+            chip.addEventListener('click', () => {
+                const val = chip.dataset.fill;
+                decInput.value = val;
+                updateAllFromDecimal(parseInt(val, 10), 'dec');
+            });
+        });
+
+        updateAllFromDecimal(255, 'dec');
+    }
+
+    // =========================================================
+    // 5. STEP-BY-STEP CONVERTER SOLVER (C++ Port)
+    // =========================================================
+    function initStepConverter() {
+        const typeSelect = document.getElementById('stepConversionType');
+        const inputNum = document.getElementById('stepInputNumber');
+        const calcBtn = document.getElementById('calculateStepBtn');
+        const outputContainer = document.getElementById('stepOutputContainer');
+
+        if (!typeSelect || !inputNum || !calcBtn || !outputContainer) return;
+
+        function generateSteps() {
+            const method = typeSelect.value;
+            const inputVal = inputNum.value.trim();
+
+            if (!inputVal) {
+                outputContainer.innerHTML = `<div class="error-msg">Please enter a number to convert.</div>`;
+                return;
+            }
+
+            switch (method) {
+                case 'dec2bin': outputContainer.innerHTML = solveDecimalToBinary(inputVal); break;
+                case 'dec2oct': outputContainer.innerHTML = solveDecimalToOctal(inputVal); break;
+                case 'dec2hex': outputContainer.innerHTML = solveDecimalToHexadecimal(inputVal); break;
+                case 'bin2dec': outputContainer.innerHTML = solveBinaryToDecimal(inputVal); break;
+                case 'oct2dec': outputContainer.innerHTML = solveOctalToDecimal(inputVal); break;
+                case 'hex2dec': outputContainer.innerHTML = solveHexadecimalToDecimal(inputVal); break;
+            }
+        }
+
+        calcBtn.addEventListener('click', generateSteps);
+        inputNum.addEventListener('keypress', (e) => { if (e.key === 'Enter') generateSteps(); });
+
+        typeSelect.addEventListener('change', () => {
+            if (typeSelect.value.startsWith('dec2')) inputNum.value = '29';
+            else if (typeSelect.value === 'bin2dec') inputNum.value = '11101';
+            else if (typeSelect.value === 'oct2dec') inputNum.value = '35';
+            else if (typeSelect.value === 'hex2dec') inputNum.value = '1D';
+            generateSteps();
+        });
+
+        generateSteps();
+    }
+
+    function solveDecimalToBinary(valStr) {
+        const dec = parseInt(valStr, 10);
+        if (isNaN(dec)) return `<div class="error-msg">Invalid Decimal Number!</div>`;
+        if (dec < 0) return `<div class="error-msg">Please enter a positive decimal number.</div>`;
+        if (dec === 0) return `<div class="final-answer-card"><div><div class="final-answer-title">FINAL ANSWER</div></div><div class="final-answer-value">0₂</div></div>`;
+
+        let decimal = dec;
+        const original = dec;
+        const remainders = [];
+        const rows = [];
+        let step = 1;
+
+        while (decimal > 0) {
+            const quotient = Math.floor(decimal / 2);
+            const rem = decimal % 2;
+            remainders.push(rem);
+            rows.push(`<tr><td>Step ${step}</td><td>${decimal} ÷ 2</td><td><strong>${quotient}</strong></td><td><span class="remainder-highlight">${rem}</span></td></tr>`);
+            decimal = quotient;
+            step++;
+        }
+
+        const binResult = [...remainders].reverse().join('');
+        const bottomToTop = [...remainders].reverse().join(' ');
+
+        return `
+            <div class="step-header-banner">
+                <span class="step-badge-title">DECIMAL TO BINARY (REPEATED DIVISION BY 2)</span>
+                <span class="badge">Base 10 → Base 2</span>
+            </div>
+            <p><strong>Process:</strong> Divide continuously by 2 and collect remainders.</p>
+            <table class="step-table">
+                <thead><tr><th>Step</th><th>Division</th><th>Quotient</th><th>Remainder</th></tr></thead>
+                <tbody>${rows.join('')}</tbody>
+            </table>
+            <div class="read-direction-box">
+                <p>⬆️ <strong>Read remainders bottom-to-top (LSB to MSB):</strong></p>
+                <div class="remainder-sequence">${bottomToTop}</div>
+            </div>
+            <p><strong>Therefore:</strong> ${original} in Decimal = <code>${binResult}</code> in Binary</p>
+            <div class="final-answer-card">
+                <div><div class="final-answer-title">FINAL ANSWER</div><div class="text-muted">Decimal ${original}₁₀ in Binary</div></div>
+                <div class="final-answer-value">${binResult}₂</div>
+            </div>
+        `;
+    }
+
+    function solveDecimalToOctal(valStr) {
+        const dec = parseInt(valStr, 10);
+        if (isNaN(dec)) return `<div class="error-msg">Invalid Decimal Number!</div>`;
+        if (dec < 0) return `<div class="error-msg">Please enter a positive decimal number.</div>`;
+        if (dec === 0) return `<div class="final-answer-card"><div class="final-answer-value">0₈</div></div>`;
+
+        let decimal = dec;
+        const original = dec;
+        const remainders = [];
+        const rows = [];
+        let step = 1;
+
+        while (decimal > 0) {
+            const quotient = Math.floor(decimal / 8);
+            const rem = decimal % 8;
+            remainders.push(rem);
+            rows.push(`<tr><td>Step ${step}</td><td>${decimal} ÷ 8</td><td><strong>${quotient}</strong></td><td><span class="remainder-highlight">${rem}</span></td></tr>`);
+            decimal = quotient;
+            step++;
+        }
+
+        const octResult = [...remainders].reverse().join('');
+        return `
+            <div class="step-header-banner"><span class="step-badge-title">DECIMAL TO OCTAL (REPEATED DIVISION BY 8)</span><span class="badge">Base 10 → Base 8</span></div>
+            <table class="step-table"><thead><tr><th>Step</th><th>Division</th><th>Quotient</th><th>Remainder</th></tr></thead><tbody>${rows.join('')}</tbody></table>
+            <div class="read-direction-box"><p>⬆️ <strong>Read remainders bottom-to-top:</strong></p><div class="remainder-sequence">${[...remainders].reverse().join(' ')}</div></div>
+            <div class="final-answer-card"><div><div class="final-answer-title">FINAL ANSWER</div></div><div class="final-answer-value">${octResult}₈</div></div>
+        `;
+    }
+
+    function solveDecimalToHexadecimal(valStr) {
+        const dec = parseInt(valStr, 10);
+        if (isNaN(dec)) return `<div class="error-msg">Invalid Decimal Number!</div>`;
+        if (dec < 0) return `<div class="error-msg">Please enter a positive decimal number.</div>`;
+        if (dec === 0) return `<div class="final-answer-card"><div class="final-answer-value">0₁₆</div></div>`;
+
+        const hexChars = "0123456789ABCDEF";
+        let decimal = dec;
+        const resultChars = [];
+        const rows = [];
+        let step = 1;
+
+        while (decimal > 0) {
+            const quotient = Math.floor(decimal / 16);
+            const rem = decimal % 16;
+            const hexChar = hexChars[rem];
+            resultChars.push(hexChar);
+            const remNote = rem >= 10 ? ` (${hexChar})` : '';
+            rows.push(`<tr><td>Step ${step}</td><td>${decimal} ÷ 16</td><td><strong>${quotient}</strong></td><td><span class="remainder-highlight">${rem}${remNote}</span></td></tr>`);
+            decimal = quotient;
+            step++;
+        }
+
+        const hexResult = [...resultChars].reverse().join('');
+        return `
+            <div class="step-header-banner"><span class="step-badge-title">DECIMAL TO HEXADECIMAL (REPEATED DIVISION BY 16)</span><span class="badge">Base 10 → Base 16</span></div>
+            <table class="step-table"><thead><tr><th>Step</th><th>Division</th><th>Quotient</th><th>Remainder</th></tr></thead><tbody>${rows.join('')}</tbody></table>
+            <div class="read-direction-box"><p>⬆️ <strong>Read remainders bottom-to-top:</strong></p><div class="remainder-sequence">${[...resultChars].reverse().join(' ')}</div></div>
+            <div class="final-answer-card"><div><div class="final-answer-title">FINAL ANSWER</div></div><div class="final-answer-value">${hexResult}₁₆</div></div>
+        `;
+    }
+
+    function solveBinaryToDecimal(binStr) {
+        if (!/^[01]+$/.test(binStr)) return `<div class="error-msg">Invalid Binary Number! Only 0 and 1 are allowed.</div>`;
+        const len = binStr.length;
+        let decimal = 0;
+        const steps = [];
+        const additions = [];
+
+        for (let i = len - 1; i >= 0; i--) {
+            const digit = parseInt(binStr[i], 10);
+            const pos = len - 1 - i;
+            const value = digit * Math.pow(2, pos);
+            decimal += value;
+            steps.push(`<div class="expansion-step-item"><span class="calc-math">Digit '${digit}' at position 2<sup>${pos}</sup>: ${digit} × 2<sup>${pos}</sup> (${Math.pow(2, pos)})</span><span class="calc-res">= ${value}</span></div>`);
+            additions.push(value);
+        }
+
+        return `
+            <div class="step-header-banner"><span class="step-badge-title">BINARY TO DECIMAL (POSITIONAL EXPANSION)</span><span class="badge">Base 2 → Base 10</span></div>
+            <div class="expansion-list">${steps.reverse().join('')}</div>
+            <div class="addition-summation-box"><p class="text-muted"><strong>Add values:</strong></p><div>${additions.reverse().join(' + ')} = <strong>${decimal}</strong></div></div>
+            <div class="final-answer-card"><div><div class="final-answer-title">FINAL ANSWER</div></div><div class="final-answer-value">${decimal}₁₀</div></div>
+        `;
+    }
+
+    function solveOctalToDecimal(octStr) {
+        if (!/^[0-7]+$/.test(octStr)) return `<div class="error-msg">Invalid Octal Number! Only 0-7 allowed.</div>`;
+        const len = octStr.length;
+        let decimal = 0;
+        const steps = [];
+        const additions = [];
+
+        for (let i = len - 1; i >= 0; i--) {
+            const digit = parseInt(octStr[i], 10);
+            const pos = len - 1 - i;
+            const value = digit * Math.pow(8, pos);
+            decimal += value;
+            steps.push(`<div class="expansion-step-item"><span class="calc-math">Digit '${digit}' at position 8<sup>${pos}</sup>: ${digit} × 8<sup>${pos}</sup></span><span class="calc-res">= ${value}</span></div>`);
+            additions.push(value);
+        }
+
+        return `
+            <div class="step-header-banner"><span class="step-badge-title">OCTAL TO DECIMAL (POSITIONAL EXPANSION)</span><span class="badge">Base 8 → Base 10</span></div>
+            <div class="expansion-list">${steps.reverse().join('')}</div>
+            <div class="addition-summation-box"><p class="text-muted"><strong>Add values:</strong></p><div>${additions.reverse().join(' + ')} = <strong>${decimal}</strong></div></div>
+            <div class="final-answer-card"><div><div class="final-answer-title">FINAL ANSWER</div></div><div class="final-answer-value">${decimal}₁₀</div></div>
+        `;
+    }
+
+    function solveHexadecimalToDecimal(hexStr) {
+        const hex = hexStr.toUpperCase();
+        if (!/^[0-9A-F]+$/.test(hex)) return `<div class="error-msg">Invalid Hexadecimal Number! Digits 0-9, A-F allowed.</div>`;
+        const len = hex.length;
+        let decimal = 0;
+        const steps = [];
+        const additions = [];
+
+        for (let i = len - 1; i >= 0; i--) {
+            const char = hex[i];
+            let value = (char >= '0' && char <= '9') ? char.charCodeAt(0) - 48 : char.charCodeAt(0) - 65 + 10;
+            const pos = len - 1 - i;
+            const calculated = value * Math.pow(16, pos);
+            decimal += calculated;
+            steps.push(`<div class="expansion-step-item"><span class="calc-math">Digit '${char}' (value ${value}) at position 16<sup>${pos}</sup>: ${value} × 16<sup>${pos}</sup></span><span class="calc-res">= ${calculated}</span></div>`);
+            additions.push(calculated);
+        }
+
+        return `
+            <div class="step-header-banner"><span class="step-badge-title">HEXADECIMAL TO DECIMAL (POSITIONAL EXPANSION)</span><span class="badge">Base 16 → Base 10</span></div>
+            <div class="expansion-list">${steps.reverse().join('')}</div>
+            <div class="addition-summation-box"><p class="text-muted"><strong>Add values:</strong></p><div>${additions.reverse().join(' + ')} = <strong>${decimal}</strong></div></div>
+            <div class="final-answer-card"><div><div class="final-answer-title">FINAL ANSWER</div></div><div class="final-answer-value">${decimal}₁₀</div></div>
+        `;
+    }
+
+    // =========================================================
+    // 6. DECIMAL ARITHMETIC
+    // =========================================================
+    function initDecimalArithmetic() {
+        const numA = document.getElementById('decNumA');
+        const numB = document.getElementById('decNumB');
+        const opSelect = document.getElementById('decOp');
+        const calcBtn = document.getElementById('calcDecArithBtn');
+        const resultContainer = document.getElementById('decArithResult');
+
+        if (!numA || !numB || !opSelect || !calcBtn || !resultContainer) return;
+
+        function calculate() {
+            const a = parseInt(numA.value, 10);
+            const b = parseInt(numB.value, 10);
+            const op = opSelect.value;
+
+            if (isNaN(a) || isNaN(b)) {
+                resultContainer.innerHTML = `<div class="error-msg">Please enter valid decimal integers.</div>`;
+                return;
+            }
+
+            let opSymbol = '+', opTitle = 'ADDITION', formula = 'Addition = A + B', result;
+
+            if (op === 'add') { opSymbol = '+'; opTitle = 'ADDITION'; result = a + b; }
+            else if (op === 'sub') { opSymbol = '−'; opTitle = 'SUBTRACTION'; result = a - b; }
+            else if (op === 'mul') { opSymbol = '×'; opTitle = 'MULTIPLICATION'; result = a * b; }
+            else if (op === 'div') {
+                opSymbol = '÷'; opTitle = 'DIVISION';
+                if (b === 0) { resultContainer.innerHTML = `<div class="error-msg">Division by zero is not allowed.</div>`; return; }
+                result = (a / b).toFixed(4).replace(/\.?0+$/, '');
+            } else if (op === 'mod') {
+                opSymbol = '%'; opTitle = 'MODULUS';
+                if (b === 0) { resultContainer.innerHTML = `<div class="error-msg">Modulus by zero is not allowed.</div>`; return; }
+                result = a % b;
+            }
+
+            resultContainer.innerHTML = `
+                <div class="step-header-banner"><span class="step-badge-title">DECIMAL ${opTitle}</span><span class="badge">${a} ${opSymbol} ${b}</span></div>
+                <div class="arithmetic-step-box">First number = ${a}
+Second number = ${b}
+
+Calculation:
+${op !== 'div' && op !== 'mod' ? `  ${a}
+${opSymbol} ${b}
+----------------
+  ${result}` : `${a} ${opSymbol} ${b} = ${result}`}
+
+FINAL ANSWER: ${result}</div>
+                <div class="final-answer-card"><div><div class="final-answer-title">FINAL ANSWER</div></div><div class="final-answer-value">${result}</div></div>
+            `;
+        }
+
+        calcBtn.addEventListener('click', calculate);
+        calculate();
+    }
+
+    // =========================================================
+    // 7. BINARY ARITHMETIC
+    // =========================================================
+    function initBinaryArithmetic() {
+        const binA = document.getElementById('binNumA');
+        const binB = document.getElementById('binNumB');
+        const binOp = document.getElementById('binOp');
+        const calcBtn = document.getElementById('calcBinArithBtn');
+        const resultContainer = document.getElementById('binArithResult');
+        const hintA = document.getElementById('binHintA');
+        const hintB = document.getElementById('binHintB');
+
+        if (!binA || !binB || !binOp || !calcBtn || !resultContainer) return;
+
+        function updateHints() {
+            const a = binA.value.trim();
+            const b = binB.value.trim();
+            if (/^[01]+$/.test(a)) hintA.textContent = `Decimal: ${parseInt(a, 2)}`;
+            else hintA.textContent = `Invalid binary`;
+
+            if (/^[01]+$/.test(b)) hintB.textContent = `Decimal: ${parseInt(b, 2)}`;
+            else hintB.textContent = `Invalid binary`;
+        }
+
+        binA.addEventListener('input', updateHints);
+        binB.addEventListener('input', updateHints);
+
+        function calculate() {
+            const a = binA.value.trim();
+            const b = binB.value.trim();
+            const op = binOp.value;
+
+            if (!/^[01]+$/.test(a) || !/^[01]+$/.test(b)) {
+                resultContainer.innerHTML = `<div class="error-msg">Invalid Binary Number! Only 0 and 1 are allowed.</div>`;
+                return;
+            }
+
+            const decA = parseInt(a, 2);
+            const decB = parseInt(b, 2);
+            let decResult, binResult, opTitle, opSymbol;
+
+            if (op === 'add') { opTitle = 'BINARY ADDITION'; opSymbol = '+'; decResult = decA + decB; binResult = decResult.toString(2); }
+            else if (op === 'sub') {
+                opTitle = 'BINARY SUBTRACTION'; opSymbol = '−';
+                if (decA < decB) { resultContainer.innerHTML = `<div class="error-msg">First number must be greater than second number for standard subtraction.</div>`; return; }
+                decResult = decA - decB; binResult = decResult.toString(2);
+            }
+            else if (op === 'mul') { opTitle = 'BINARY MULTIPLICATION'; opSymbol = '×'; decResult = decA * decB; binResult = decResult.toString(2); }
+            else if (op === 'div') {
+                opTitle = 'BINARY DIVISION'; opSymbol = '÷';
+                if (decB === 0) { resultContainer.innerHTML = `<div class="error-msg">Division by zero is not allowed.</div>`; return; }
+                decResult = Math.floor(decA / decB); binResult = decResult.toString(2);
+            }
+
+            resultContainer.innerHTML = `
+                <div class="step-header-banner"><span class="step-badge-title">${opTitle}</span><span class="badge">${a}₂ ${opSymbol} ${b}₂</span></div>
+                <div class="arithmetic-step-box">Convert to Decimal:
+${a} = ${decA}
+${b} = ${decB}
+
+Calculation: ${decA} ${opSymbol} ${decB} = ${decResult}
+
+Convert back to Binary:
+${decResult} = ${binResult}
+
+FINAL ANSWER: ${binResult}</div>
+                <div class="final-answer-card"><div><div class="final-answer-title">FINAL BINARY ANSWER</div><div class="text-muted">Decimal: ${decResult}</div></div><div class="final-answer-value">${binResult}₂</div></div>
+            `;
+        }
+
+        calcBtn.addEventListener('click', calculate);
+        updateHints();
+        calculate();
+    }
+
+    // =========================================================
+    // 8. NUMBER VALIDATOR
+    // =========================================================
+    function initValidator() {
+        const input = document.getElementById('validateInput');
+        if (!input) return;
+
+        function runValidation() {
+            const val = input.value.trim();
+            validateBase('Bin', val, /^[01]$/, 'Binary');
+            validateBase('Oct', val, /^[0-7]$/, 'Octal');
+            validateBase('Dec', val, /^[0-9]$/, 'Decimal');
+            validateBase('Hex', val, /^[0-9a-fA-F]$/, 'Hexadecimal');
+        }
+
+        function validateBase(key, str, charRegex, baseName) {
+            const card = document.getElementById(`valCard${key}`);
+            const badge = document.getElementById(`valBadge${key}`);
+            const stream = document.getElementById(`valStream${key}`);
+
+            if (!card || !badge || !stream) return;
+
+            if (!str) {
+                card.className = 'validator-card';
+                badge.className = 'val-badge';
+                badge.textContent = 'Awaiting input';
+                stream.innerHTML = '';
+                return;
+            }
+
+            let allValid = true;
+            const chips = [];
+
+            for (let i = 0; i < str.length; i++) {
+                const c = str[i];
+                const isValid = charRegex.test(c);
+                if (!isValid) allValid = false;
+                chips.push(`<span class="char-chip ${isValid ? 'valid-char' : 'invalid-char'}">${c}</span>`);
+            }
+
+            stream.innerHTML = chips.join('');
+            card.className = allValid ? 'validator-card valid' : 'validator-card invalid';
+            badge.className = allValid ? 'val-badge badge-valid' : 'val-badge badge-invalid';
+            badge.textContent = allValid ? `Valid ${baseName}` : `Invalid ${baseName}`;
+        }
+
+        input.addEventListener('input', runValidation);
+        runValidation();
+    }
+
+    // =========================================================
+    // 9. INTERACTIVE BIT BOARD
+    // =========================================================
+    function initBitBoard() {
+        const container = document.getElementById('bitGridContainer');
+        const sizeButtons = document.querySelectorAll('#bitSizeGroup button');
+        const bitClearBtn = document.getElementById('bitClearBtn');
+        const bitSetAllBtn = document.getElementById('bitSetAllBtn');
+        const bitInvertBtn = document.getElementById('bitInvertBtn');
+        const bitShiftLeftBtn = document.getElementById('bitShiftLeftBtn');
+        const bitShiftRightBtn = document.getElementById('bitShiftRightBtn');
+
+        if (!container) return;
+
+        sizeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                sizeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.bitBoardSize = parseInt(btn.dataset.bits, 10);
+                renderBitBoard();
+            });
+        });
+
+        function renderBitBoard() {
+            container.innerHTML = '';
+            const size = state.bitBoardSize;
+            const byteCount = size / 8;
+
+            for (let byteIndex = 0; byteIndex < byteCount; byteIndex++) {
+                const byteGroup = document.createElement('div');
+                byteGroup.className = 'byte-group';
+
+                for (let bitInByte = 7; bitInByte >= 0; bitInByte--) {
+                    const bitPos = (byteCount - 1 - byteIndex) * 8 + bitInByte;
+                    const isSet = state.bitBoardState[bitPos] === 1;
+
+                    const cell = document.createElement('div');
+                    cell.className = 'bit-cell';
+
+                    const posLabel = document.createElement('span');
+                    posLabel.className = 'bit-pos';
+                    posLabel.textContent = `b${bitPos}`;
+
+                    const bitBtn = document.createElement('button');
+                    bitBtn.className = `bit-btn ${isSet ? 'on' : ''}`;
+                    bitBtn.textContent = isSet ? '1' : '0';
+                    bitBtn.addEventListener('click', () => {
+                        state.bitBoardState[bitPos] = state.bitBoardState[bitPos] === 1 ? 0 : 1;
+                        renderBitBoard();
+                    });
+
+                    const weightLabel = document.createElement('span');
+                    weightLabel.className = 'bit-weight';
+                    weightLabel.textContent = bitPos < 16 ? Math.pow(2, bitPos) : `2^${bitPos}`;
+
+                    cell.appendChild(posLabel);
+                    cell.appendChild(bitBtn);
+                    cell.appendChild(weightLabel);
+                    byteGroup.appendChild(cell);
+                }
+
+                container.appendChild(byteGroup);
+            }
+
+            updateBitValues();
+        }
+
+        function updateBitValues() {
+            const size = state.bitBoardSize;
+            let binStr = '';
+            for (let i = size - 1; i >= 0; i--) {
+                binStr += state.bitBoardState[i];
+            }
+
+            const unsignedDec = BigInt('0b' + binStr);
+            let signedDec = unsignedDec;
+
+            if (state.bitBoardState[size - 1] === 1) {
+                const maxVal = 1n << BigInt(size);
+                signedDec = unsignedDec - maxVal;
+            }
+
+            const hexStr = unsignedDec.toString(16).toUpperCase().padStart(Math.ceil(size / 4), '0');
+            const octStr = unsignedDec.toString(8);
+
+            const unsignedEl = document.getElementById('bitValUnsigned');
+            const signedEl = document.getElementById('bitValSigned');
+            const hexEl = document.getElementById('bitValHex');
+            const octEl = document.getElementById('bitValOct');
+            const asciiEl = document.getElementById('bitValAscii');
+
+            if (unsignedEl) unsignedEl.textContent = unsignedDec.toString();
+            if (signedEl) signedEl.textContent = signedDec.toString();
+            if (hexEl) hexEl.textContent = `0x${hexStr}`;
+            if (octEl) octEl.textContent = `0o${octStr}`;
+
+            const asciiVal = Number(unsignedDec & 0xFFn);
+            let asciiChar = 'N/A';
+            if (asciiVal >= 32 && asciiVal <= 126) asciiChar = `'${String.fromCharCode(asciiVal)}'`;
+            else if (asciiVal === 0) asciiChar = 'NUL';
+            else asciiChar = `[0x${asciiVal.toString(16).toUpperCase()}]`;
+
+            if (asciiEl) asciiEl.textContent = asciiChar;
+        }
+
+        if (bitClearBtn) bitClearBtn.addEventListener('click', () => { state.bitBoardState.fill(0); renderBitBoard(); });
+        if (bitSetAllBtn) bitSetAllBtn.addEventListener('click', () => { for (let i = 0; i < state.bitBoardSize; i++) state.bitBoardState[i] = 1; renderBitBoard(); });
+        if (bitInvertBtn) bitInvertBtn.addEventListener('click', () => { for (let i = 0; i < state.bitBoardSize; i++) state.bitBoardState[i] = state.bitBoardState[i] === 1 ? 0 : 1; renderBitBoard(); });
+        if (bitShiftLeftBtn) bitShiftLeftBtn.addEventListener('click', () => { for (let i = state.bitBoardSize - 1; i > 0; i--) state.bitBoardState[i] = state.bitBoardState[i - 1]; state.bitBoardState[0] = 0; renderBitBoard(); });
+        if (bitShiftRightBtn) bitShiftRightBtn.addEventListener('click', () => { for (let i = 0; i < state.bitBoardSize - 1; i++) state.bitBoardState[i] = state.bitBoardState[i + 1]; state.bitBoardState[state.bitBoardSize - 1] = 0; renderBitBoard(); });
+
+        renderBitBoard();
+    }
+
+    // =========================================================
+    // 10. TRIGONOMETRY LAB & UNIT CIRCLE
+    // =========================================================
+    const exactTrigValues = {
+        0:   { sin: '0', cos: '1', tan: '0', csc: 'Undefined', sec: '1', cot: 'Undefined' },
+        30:  { sin: '1/2', cos: '√3 / 2', tan: '√3 / 3', csc: '2', sec: '2√3 / 3', cot: '√3' },
+        45:  { sin: '√2 / 2', cos: '√2 / 2', tan: '1', csc: '√2', sec: '√2', cot: '1' },
+        60:  { sin: '√3 / 2', cos: '1/2', tan: '√3', csc: '2√3 / 3', sec: '2', cot: '√3 / 3' },
+        90:  { sin: '1', cos: '0', tan: 'Undefined', csc: '1', sec: 'Undefined', cot: '0' },
+        120: { sin: '√3 / 2', cos: '-1/2', tan: '-√3', csc: '2√3 / 3', sec: '-2', cot: '-√3 / 3' },
+        135: { sin: '√2 / 2', cos: '-√2 / 2', tan: '-1', csc: '√2', sec: '-√2', cot: '-1' },
+        150: { sin: '1/2', cos: '-√3 / 2', tan: '-√3 / 3', csc: '2', sec: '-2√3 / 3', cot: '-√3' },
+        180: { sin: '0', cos: '-1', tan: '0', csc: 'Undefined', sec: '-1', cot: 'Undefined' },
+        210: { sin: '-1/2', cos: '-√3 / 2', tan: '√3 / 3', csc: '-2', sec: '-2√3 / 3', cot: '√3' },
+        225: { sin: '-√2 / 2', cos: '-√2 / 2', tan: '1', csc: '-√2', sec: '-√2', cot: '1' },
+        240: { sin: '-√3 / 2', cos: '-1/2', tan: '√3', csc: '-2√3 / 3', sec: '-2', cot: '√3 / 3' },
+        270: { sin: '-1', cos: '0', tan: 'Undefined', csc: '-1', sec: 'Undefined', cot: '0' },
+        300: { sin: '-√3 / 2', cos: '1/2', tan: '-√3', csc: '-2√3 / 3', sec: '2', cot: '-√3 / 3' },
+        315: { sin: '-√2 / 2', cos: '√2 / 2', tan: '-1', csc: '-√2', sec: '√2', cot: '-1' },
+        330: { sin: '-1/2', cos: '√3 / 2', tan: '-√3 / 3', csc: '-2', sec: '2√3 / 3', cot: '-√3' },
+        360: { sin: '0', cos: '1', tan: '0', csc: 'Undefined', sec: '1', cot: 'Undefined' }
+    };
+
+    function initTrigonometry() {
+        const angleInput = document.getElementById('trigAngleInput');
+        const angleSlider = document.getElementById('trigAngleSlider');
+        const modeButtons = document.querySelectorAll('#trigAngleModeGroup button');
+        const unitBadge = document.getElementById('trigUnitBadge');
+
+        if (!angleInput) return;
+
+        modeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                modeButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                state.trigAngleMode = btn.dataset.mode;
+                
+                if (unitBadge) {
+                    if (state.trigAngleMode === 'deg') unitBadge.textContent = 'deg (°)';
+                    else if (state.trigAngleMode === 'rad') unitBadge.textContent = 'rad';
+                    else if (state.trigAngleMode === 'grad') unitBadge.textContent = 'grad';
+                }
+
+                syncTrigInputsFromState();
+            });
+        });
+
+        angleInput.addEventListener('input', () => {
+            let val = parseFloat(angleInput.value);
+            if (isNaN(val)) return;
+
+            let deg = val;
+            if (state.trigAngleMode === 'rad') deg = val * (180 / Math.PI);
+            else if (state.trigAngleMode === 'grad') deg = val * 0.9;
+
+            state.currentTrigAngleDeg = deg;
+            if (angleSlider) angleSlider.value = ((deg % 360) + 360) % 360;
+            updateTrigOutputs();
+            drawUnitCircle();
+        });
+
+        if (angleSlider) {
+            angleSlider.addEventListener('input', () => {
+                const deg = parseFloat(angleSlider.value);
+                state.currentTrigAngleDeg = deg;
+
+                if (state.trigAngleMode === 'deg') angleInput.value = deg;
+                else if (state.trigAngleMode === 'rad') angleInput.value = (deg * (Math.PI / 180)).toFixed(4);
+                else if (state.trigAngleMode === 'grad') angleInput.value = (deg / 0.9).toFixed(2);
+
+                updateTrigOutputs();
+                drawUnitCircle();
+            });
+        }
+
+        document.querySelectorAll('[data-trig-angle]').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const deg = parseFloat(btn.dataset.trigAngle);
+                state.currentTrigAngleDeg = deg;
+                if (angleSlider) angleSlider.value = deg;
+
+                if (state.trigAngleMode === 'deg') angleInput.value = deg;
+                else if (state.trigAngleMode === 'rad') angleInput.value = (deg * (Math.PI / 180)).toFixed(4);
+                else if (state.trigAngleMode === 'grad') angleInput.value = (deg / 0.9).toFixed(2);
+
+                updateTrigOutputs();
+                drawUnitCircle();
+            });
+        });
+
+        syncTrigInputsFromState();
+    }
+
+    function syncTrigInputsFromState() {
+        const angleInput = document.getElementById('trigAngleInput');
+        const angleSlider = document.getElementById('trigAngleSlider');
+        let deg = state.currentTrigAngleDeg;
+
+        if (angleInput) {
+            if (state.trigAngleMode === 'deg') angleInput.value = deg;
+            else if (state.trigAngleMode === 'rad') angleInput.value = (deg * (Math.PI / 180)).toFixed(4);
+            else if (state.trigAngleMode === 'grad') angleInput.value = (deg / 0.9).toFixed(2);
+        }
+
+        if (angleSlider) {
+            angleSlider.value = ((deg % 360) + 360) % 360;
+        }
+
+        updateTrigOutputs();
+        drawUnitCircle();
+    }
+
+    function updateTrigOutputs() {
+        const rad = state.currentTrigAngleDeg * (Math.PI / 180);
+        const normDeg = Math.round(((state.currentTrigAngleDeg % 360) + 360) % 360);
+
+        const sinVal = Math.sin(rad);
+        const cosVal = Math.cos(rad);
+        let tanVal = (normDeg === 90 || normDeg === 270) ? NaN : Math.tan(rad);
+
+        const cscVal = Math.abs(sinVal) < 1e-12 ? NaN : 1 / sinVal;
+        const secVal = Math.abs(cosVal) < 1e-12 ? NaN : 1 / cosVal;
+        const cotVal = Math.abs(tanVal) < 1e-12 ? NaN : 1 / tanVal;
+
+        const sinhVal = Math.sinh(rad);
+        const coshVal = Math.cosh(rad);
+        const tanhVal = Math.tanh(rad);
+
+        const formatVal = (v) => isNaN(v) ? 'Undefined' : Math.abs(v) < 1e-12 ? '0.0000' : v.toFixed(4);
+
+        const setTxt = (id, txt) => {
+            const el = document.getElementById(id);
+            if (el) el.textContent = txt;
+        };
+
+        setTxt('resSin', formatVal(sinVal));
+        setTxt('resCos', formatVal(cosVal));
+        setTxt('resTan', formatVal(tanVal));
+        setTxt('resCsc', formatVal(cscVal));
+        setTxt('resSec', formatVal(secVal));
+        setTxt('resCot', formatVal(cotVal));
+
+        setTxt('resSinh', formatVal(sinhVal));
+        setTxt('resCosh', formatVal(coshVal));
+        setTxt('resTanh', formatVal(tanhVal));
+
+        const exact = exactTrigValues[normDeg];
+        setTxt('exactSin', exact ? exact.sin : '');
+        setTxt('exactCos', exact ? exact.cos : '');
+        setTxt('exactTan', exact ? exact.tan : '');
+        setTxt('exactCsc', exact ? exact.csc : '');
+        setTxt('exactSec', exact ? exact.sec : '');
+        setTxt('exactCot', exact ? exact.cot : '');
+
+        setTxt('unitCoordsBadge', `(x: ${formatVal(cosVal)}, y: ${formatVal(sinVal)})`);
+    }
+
+    function drawUnitCircle() {
+        const canvas = document.getElementById('unitCircleCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+        const cx = width / 2;
+        const cy = height / 2;
+        const radius = 110;
+
+        ctx.clearRect(0, 0, width, height);
+
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const axisColor = isDark ? '#475569' : '#cbd5e1';
+        const gridColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(0,0,0,0.05)';
+        const textColor = isDark ? '#94a3b8' : '#475569';
+
+        // Background guide
+        ctx.strokeStyle = gridColor;
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius * 0.5, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        // Axes
+        ctx.strokeStyle = axisColor;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(15, cy);
+        ctx.lineTo(width - 15, cy);
+        ctx.moveTo(cx, 15);
+        ctx.lineTo(cx, height - 15);
+        ctx.stroke();
+
+        // Labels
+        ctx.fillStyle = textColor;
+        ctx.font = '11px sans-serif';
+        ctx.fillText('+X (cos)', width - 48, cy - 8);
+        ctx.fillText('+Y (sin)', cx + 8, 25);
+        ctx.fillText('(1, 0)', cx + radius + 4, cy - 6);
+        ctx.fillText('(0, 1)', cx + 4, cy - radius - 6);
+        ctx.fillText('(-1, 0)', cx - radius - 36, cy - 6);
+        ctx.fillText('(0, -1)', cx + 4, cy + radius + 14);
+
+        // Unit Circle
+        ctx.strokeStyle = isDark ? '#38bdf8' : '#0284c7';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        // Point
+        const rad = state.currentTrigAngleDeg * (Math.PI / 180);
+        const px = cx + radius * Math.cos(rad);
+        const py = cy - radius * Math.sin(rad);
+
+        // Cosine Projection (Blue)
+        ctx.strokeStyle = '#3b82f6';
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(px, cy);
+        ctx.stroke();
+
+        // Sine Projection (Green)
+        ctx.strokeStyle = '#10b981';
+        ctx.lineWidth = 3.5;
+        ctx.beginPath();
+        ctx.moveTo(px, cy);
+        ctx.lineTo(px, py);
+        ctx.stroke();
+
+        // Hypotenuse (Pink)
+        ctx.strokeStyle = '#ec4899';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(px, py);
+        ctx.stroke();
+
+        // Arc
+        ctx.strokeStyle = '#f59e0b';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.arc(cx, cy, 32, 0, -rad, true);
+        ctx.stroke();
+
+        // Point
+        ctx.fillStyle = '#f8fafc';
+        ctx.beginPath();
+        ctx.arc(px, py, 6, 0, 2 * Math.PI);
+        ctx.fill();
+        ctx.strokeStyle = '#ec4899';
+        ctx.lineWidth = 2.5;
+        ctx.stroke();
+    }
+
+    // =========================================================
+    // 11. LOGARITHM SUITE & STEP SOLVER (ROBUST NUMERIC PARSING)
+    // =========================================================
+    function parseMathInput(str) {
+        if (!str) return NaN;
+        const trimmed = str.toString().trim().toLowerCase();
+        if (trimmed === 'e') return Math.E;
+        if (trimmed === 'pi' || trimmed === 'π') return Math.PI;
+        return parseFloat(trimmed);
+    }
+
+    function initLogarithms() {
+        const argInput = document.getElementById('logArgInput');
+        const baseInput = document.getElementById('logBaseInput');
+        const calcBtn = document.getElementById('calcLogBtn');
+        const resultContainer = document.getElementById('logStepResult');
+        const presetChips = document.querySelectorAll('.quick-log-bases button');
+
+        if (!argInput || !baseInput || !calcBtn || !resultContainer) return;
+
+        presetChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const baseVal = chip.dataset.logBase;
+                baseInput.value = baseVal;
+                calculateLog();
+            });
+        });
+
+        function calculateLog() {
+            const rawArg = argInput.value.trim();
+            const rawBase = baseInput.value.trim();
+
+            const arg = parseMathInput(rawArg);
+            const base = parseMathInput(rawBase);
+
+            if (isNaN(arg) || isNaN(base)) {
+                resultContainer.innerHTML = `<div class="error-msg">Please enter valid numeric values for Argument and Base (e.g. 100, 10, e, 2).</div>`;
+                return;
+            }
+
+            if (arg <= 0) {
+                resultContainer.innerHTML = `<div class="error-msg"><strong>Domain Error:</strong> Argument x must be strictly positive (x &gt; 0). Given: ${arg}</div>`;
+                return;
+            }
+
+            if (base <= 0 || Math.abs(base - 1) < 1e-12) {
+                resultContainer.innerHTML = `<div class="error-msg"><strong>Base Error:</strong> Base b must be strictly positive and cannot equal 1 (b &gt; 0, b ≠ 1). Given: ${base}</div>`;
+                return;
+            }
+
+            const lnArg = Math.log(arg);
+            const lnBase = Math.log(base);
+            const logResult = lnArg / lnBase;
+
+            const baseDisplay = Math.abs(base - Math.E) < 1e-6 ? 'e' : base;
+            const logNotation = baseDisplay === 'e' ? `ln(${arg})` : base === 10 ? `log₁₀(${arg})` : base === 2 ? `log₂(${arg})` : `log<sub>${base}</sub>(${arg})`;
+
+            resultContainer.innerHTML = `
+                <div class="step-header-banner">
+                    <span class="step-badge-title">LOGARITHM STEP-BY-STEP CALCULATION</span>
+                    <span class="badge">${logNotation}</span>
+                </div>
+                <div class="arithmetic-step-box">
+<strong>Given:</strong>
+  Argument (x) = ${arg}
+  Base (b)     = ${baseDisplay}
+
+<strong>Formula (Change of Base):</strong>
+  log<sub>b</sub>(x) = ln(x) / ln(b) = log₁₀(x) / log₁₀(b)
+
+<strong>Steps:</strong>
+  Step 1: Calculate natural log of argument:
+          ln(${arg}) = ${lnArg.toFixed(6)}
+
+  Step 2: Calculate natural log of base:
+          ln(${baseDisplay}) = ${lnBase.toFixed(6)}
+
+  Step 3: Divide Step 1 by Step 2:
+          ${logNotation} = ${lnArg.toFixed(6)} ÷ ${lnBase.toFixed(6)}
+          = <strong>${logResult.toFixed(6)}</strong>
+
+<strong>Verification (Exponential Form):</strong>
+  b<sup>result</sup> = (${baseDisplay})<sup>${logResult.toFixed(4)}</sup> = ${Math.pow(base, logResult).toFixed(4)} ≈ ${arg}
+
+<strong>Therefore:</strong>
+  FINAL ANSWER: ${logResult.toFixed(6)}
+                </div>
+                <div class="final-answer-card">
+                    <div>
+                        <div class="final-answer-title">FINAL LOGARITHMIC ANSWER</div>
+                        <div class="text-muted">${logNotation}</div>
+                    </div>
+                    <div class="final-answer-value">${logResult.toFixed(6)}</div>
+                </div>
+            `;
+
+            drawLogGraph(arg, base, logResult);
+        }
+
+        calcBtn.addEventListener('click', calculateLog);
+        argInput.addEventListener('input', calculateLog);
+        baseInput.addEventListener('input', calculateLog);
+
+        calculateLog();
+    }
+
+    function drawLogGraph(activeX = 100, activeBase = 10, activeY = 2) {
+        const canvas = document.getElementById('logGraphCanvas');
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const width = canvas.width;
+        const height = canvas.height;
+
+        ctx.clearRect(0, 0, width, height);
+
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        const axisColor = isDark ? '#475569' : '#cbd5e1';
+        const textColor = isDark ? '#94a3b8' : '#475569';
+
+        const originX = 40;
+        const originY = height / 2 + 30;
+
+        // Axes
+        ctx.strokeStyle = axisColor;
+        ctx.lineWidth = 1.5;
+        ctx.beginPath();
+        ctx.moveTo(originX, 15);
+        ctx.lineTo(originX, height - 15);
+        ctx.moveTo(15, originY);
+        ctx.lineTo(width - 15, originY);
+        ctx.stroke();
+
+        ctx.fillStyle = textColor;
+        ctx.font = '10px monospace';
+        ctx.fillText('x=0', originX - 25, 25);
+        ctx.fillText('+X', width - 25, originY - 6);
+        ctx.fillText('+Y', originX + 6, 25);
+        ctx.fillText('(1,0)', originX + 28, originY + 14);
+
+        const scaleX = (width - originX - 30) / 10;
+        const scaleY = 32;
+
+        ctx.strokeStyle = '#38bdf8';
+        ctx.lineWidth = 2.5;
+        ctx.beginPath();
+
+        let started = false;
+        for (let px = 1; px <= width - originX - 20; px += 2) {
+            const mathX = px / scaleX;
+            if (mathX <= 0) continue;
+
+            const mathY = Math.log(mathX) / Math.log(activeBase > 0 && activeBase !== 1 ? activeBase : 10);
+            const canvasY = originY - mathY * scaleY;
+
+            if (canvasY >= 10 && canvasY <= height - 10) {
+                if (!started) {
+                    ctx.moveTo(originX + px, canvasY);
+                    started = true;
+                } else {
+                    ctx.lineTo(originX + px, canvasY);
+                }
+            }
+        }
+        ctx.stroke();
+
+        // Intercept (1,0)
+        const interceptX = originX + 1 * scaleX;
+        ctx.fillStyle = '#10b981';
+        ctx.beginPath();
+        ctx.arc(interceptX, originY, 4, 0, 2 * Math.PI);
+        ctx.fill();
+
+        const coordBadge = document.getElementById('logCoordBadge');
+        if (coordBadge) {
+            coordBadge.textContent = `Point: (${activeX}, ${isNaN(activeY) ? '?' : activeY.toFixed(3)})`;
+        }
+    }
+
+    // =========================================================
+    // 12. PRACTICE & QUIZ
+    // =========================================================
+    function initQuiz() {
+        const promptElem = document.getElementById('quizPrompt');
+        const optionsGrid = document.getElementById('quizOptions');
+        const feedbackBox = document.getElementById('quizFeedback');
+        const feedbackText = document.getElementById('feedbackText');
+        const nextBtn = document.getElementById('quizNextBtn');
+        const scoreElem = document.getElementById('quizScore');
+        const streakElem = document.getElementById('quizStreak');
+
+        if (!promptElem || !optionsGrid || !feedbackBox || !nextBtn) return;
+
+        function generateQuizQuestion() {
+            feedbackBox.style.display = 'none';
+            optionsGrid.innerHTML = '';
+
+            const types = ['dec2bin', 'bin2dec', 'hex2dec', 'binAdd', 'trigBasic', 'logBasic'];
+            const chosenType = types[Math.floor(Math.random() * types.length)];
+
+            let questionText = '';
+            let correctAnswer = '';
+            let options = [];
+
+            if (chosenType === 'dec2bin') {
+                const dec = Math.floor(Math.random() * 63) + 1;
+                questionText = `Convert Decimal <span class="text-accent">${dec}</span> to Binary:`;
+                correctAnswer = dec.toString(2);
+                options = [correctAnswer, (dec + 1).toString(2), (dec - 1 > 0 ? dec - 1 : dec + 2).toString(2), (dec ^ 3).toString(2)];
+            } else if (chosenType === 'bin2dec') {
+                const dec = Math.floor(Math.random() * 31) + 1;
+                const bin = dec.toString(2);
+                questionText = `Convert Binary <span class="text-accent">${bin}₂</span> to Decimal:`;
+                correctAnswer = dec.toString();
+                options = [correctAnswer, (dec + 2).toString(), (dec - 2 > 0 ? dec - 2 : dec + 4).toString(), (dec + 1).toString()];
+            } else if (chosenType === 'hex2dec') {
+                const dec = Math.floor(Math.random() * 255) + 1;
+                const hex = dec.toString(16).toUpperCase();
+                questionText = `Convert Hexadecimal <span class="text-accent">0x${hex}</span> to Decimal:`;
+                correctAnswer = dec.toString();
+                options = [correctAnswer, (dec + 16).toString(), (dec - 10 > 0 ? dec - 10 : dec + 8).toString(), (dec + 5).toString()];
+            } else if (chosenType === 'binAdd') {
+                const a = Math.floor(Math.random() * 15) + 1;
+                const b = Math.floor(Math.random() * 15) + 1;
+                questionText = `Add binary: <span class="text-accent">${a.toString(2)}₂ + ${b.toString(2)}₂</span>:`;
+                correctAnswer = (a + b).toString(2);
+                options = [correctAnswer, (a + b + 1).toString(2), (a + b - 1 > 0 ? a + b - 1 : a + b + 2).toString(2), ((a ^ b)).toString(2)];
+            } else if (chosenType === 'trigBasic') {
+                const trigQuestions = [
+                    { q: 'What is sin(30°)?', a: '1/2', opts: ['1/2', '√3/2', '√2/2', '1'] },
+                    { q: 'What is cos(60°)?', a: '1/2', opts: ['1/2', '√3/2', '0', '1'] },
+                    { q: 'What is tan(45°)?', a: '1', opts: ['1', '0', '√3', 'Undefined'] },
+                    { q: 'What is sin(90°)?', a: '1', opts: ['1', '0', '-1', '1/2'] },
+                    { q: 'What is cos(0°)?', a: '1', opts: ['1', '0', '-1', 'Undefined'] }
+                ];
+                const tq = trigQuestions[Math.floor(Math.random() * trigQuestions.length)];
+                questionText = `<span class="text-accent">${tq.q}</span>`;
+                correctAnswer = tq.a;
+                options = [...tq.opts];
+            } else if (chosenType === 'logBasic') {
+                const logQuestions = [
+                    { q: 'What is log₂(64)?', a: '6', opts: ['6', '5', '8', '32'] },
+                    { q: 'What is log₁₀(1000)?', a: '3', opts: ['3', '2', '4', '100'] },
+                    { q: 'What is log₂(256)?', a: '8', opts: ['8', '7', '16', '64'] },
+                    { q: 'What is log₅(125)?', a: '3', opts: ['3', '2', '5', '25'] },
+                    { q: 'What is ln(1)?', a: '0', opts: ['0', '1', 'e', 'Undefined'] }
+                ];
+                const lq = logQuestions[Math.floor(Math.random() * logQuestions.length)];
+                questionText = `<span class="text-accent">${lq.q}</span>`;
+                correctAnswer = lq.a;
+                options = [...lq.opts];
+            }
+
+            options = Array.from(new Set(options));
+            while (options.length < 4) {
+                options.push((Math.floor(Math.random() * 50)).toString(2));
+                options = Array.from(new Set(options));
+            }
+
+            options.sort(() => Math.random() - 0.5);
+
+            state.quiz.currentQuestion = { text: questionText, correctAnswer: correctAnswer };
+            promptElem.innerHTML = questionText;
+
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.className = 'quiz-option-btn';
+                btn.textContent = opt;
+                btn.addEventListener('click', () => handleOptionClick(btn, opt, correctAnswer));
+                optionsGrid.appendChild(btn);
+            });
+        }
+
+        function handleOptionClick(selectedBtn, chosenOpt, correctOpt) {
+            const allBtns = optionsGrid.querySelectorAll('.quiz-option-btn');
+            allBtns.forEach(btn => btn.disabled = true);
+
+            const isCorrect = chosenOpt === correctOpt;
+
+            if (isCorrect) {
+                selectedBtn.classList.add('correct');
+                state.quiz.score += 10;
+                state.quiz.streak += 1;
+                if (feedbackText) feedbackText.innerHTML = `🎉 <strong>Correct!</strong> Great job! (+10 pts)`;
+            } else {
+                selectedBtn.classList.add('wrong');
+                state.quiz.streak = 0;
+                allBtns.forEach(btn => {
+                    if (btn.textContent === correctOpt) btn.classList.add('correct');
+                });
+                if (feedbackText) feedbackText.innerHTML = `❌ <strong>Not quite!</strong> Correct answer was <code>${correctOpt}</code>.`;
+            }
+
+            if (scoreElem) scoreElem.textContent = state.quiz.score;
+            if (streakElem) streakElem.textContent = `${state.quiz.streak} 🔥`;
+            feedbackBox.style.display = 'flex';
+        }
+
+        nextBtn.addEventListener('click', generateQuizQuestion);
+        generateQuizQuestion();
+    }
+});
+
+</script>
+</body>
+</html>
